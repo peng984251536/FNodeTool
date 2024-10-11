@@ -60,13 +60,12 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+/.idea
 /Library*
 /Assets/ProCore*
 /Temp*
 /Logs*
 /obj*
-/Packages*
-/ProjectSettings*
 /UserSettings*
 
 # Crashlytics generated file
