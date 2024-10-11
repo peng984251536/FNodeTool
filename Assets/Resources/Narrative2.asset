@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1233f870b24d7788a6f55e20a4e0f8, type: 3}
+  m_Name: Narrative2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - OutPortName: Next
+    InPortName: Input
+    OutputNodeGuid: 94df41bc-cf85-4806-bc5e-edaa49e28dea
+    OutputNodeIndex: 0
+    InputNodeGuid: c9b60f48-cbe7-4ce1-bb81-0d62a5924060
+    InputNodeIndex: 0
+  - OutPortName: Next
+    InPortName: Input2
+    OutputNodeGuid: 94df41bc-cf85-4806-bc5e-edaa49e28dea
+    OutputNodeIndex: 0
+    InputNodeGuid: c9b60f48-cbe7-4ce1-bb81-0d62a5924060
+    InputNodeIndex: 1
+  - OutPortName: Choice 2
+    InPortName: Input
+    OutputNodeGuid: 239231b7-2c68-487f-9c7a-a73e3c0f1d9b
+    OutputNodeIndex: 1
+    InputNodeGuid: d2743f6c-c375-49c4-ba00-da9ea0ce628c
+    InputNodeIndex: 0
+  - OutPortName: Choice 1
+    InPortName: Input2
+    OutputNodeGuid: 239231b7-2c68-487f-9c7a-a73e3c0f1d9b
+    OutputNodeIndex: 0
+    InputNodeGuid: d2743f6c-c375-49c4-ba00-da9ea0ce628c
+    InputNodeIndex: 1
+  - OutPortName: Choice 1
+    InPortName: Input2
+    OutputNodeGuid: c9b60f48-cbe7-4ce1-bb81-0d62a5924060
+    OutputNodeIndex: 0
+    InputNodeGuid: 239231b7-2c68-487f-9c7a-a73e3c0f1d9b
+    InputNodeIndex: 1
+  - OutPortName: Choice 2
+    InPortName: Input
+    OutputNodeGuid: c9b60f48-cbe7-4ce1-bb81-0d62a5924060
+    OutputNodeIndex: 1
+    InputNodeGuid: 239231b7-2c68-487f-9c7a-a73e3c0f1d9b
+    InputNodeIndex: 0
+  DialogueNodeDatas:
+  - NodeType: MyEditorView.EntryPointNode
+    Guid: 94df41bc-cf85-4806-bc5e-edaa49e28dea
+    DialogueText: ENTRYPOINT
+    Position: {x: 100, y: 200}
+    OutputCount: 1
+    InputCount: 0
+  - NodeType: MyEditorView.DialogueNode
+    Guid: c9b60f48-cbe7-4ce1-bb81-0d62a5924060
+    DialogueText: Dialogue Node
+    Position: {x: 255, y: 200}
+    OutputCount: 2
+    InputCount: 2
+  - NodeType: MyEditorView.DialogueNode
+    Guid: 239231b7-2c68-487f-9c7a-a73e3c0f1d9b
+    DialogueText: Dialogue Node
+    Position: {x: 518, y: 200}
+    OutputCount: 4
+    InputCount: 2
+  - NodeType: MyEditorView.DialogueNode
+    Guid: d2743f6c-c375-49c4-ba00-da9ea0ce628c
+    DialogueText: Dialogue Node
+    Position: {x: 820, y: 200}
+    OutputCount: 2
+    InputCount: 2

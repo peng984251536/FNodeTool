@@ -1,0 +1,20 @@
+{
+    "name": "FNode.Sample.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0f020e099f8d9345a6bb2ce40b8dbc3",
+        "GUID:74cac1cc8c228da4b99a906f2a27c86f",
+        "GUID:9c415ed55a962684ebe9b249752fcfef"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

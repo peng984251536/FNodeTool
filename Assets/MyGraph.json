@@ -1,0 +1,92 @@
+{
+  "nodes": [
+    {
+      "GUID": "acf96be0-d330-4185-892e-245ea834c2a9",
+      "Position": {
+        "x": 71.0,
+        "y": -350.0,
+        "normalized": {
+          "x": 0.198807821,
+          "y": -0.9800385,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 357.1288,
+        "sqrMagnitude": 127541.0
+      },
+      "UniqueName": "TestNode",
+      "Fields": "{\r\n  \"textInfo\": null,\r\n  \"GUID\": null,\r\n  \"UniqueName\": null\r\n}"
+    },
+    {
+      "GUID": "c541daed-3bb8-467a-9676-225d8a74b1e1",
+      "Position": {
+        "x": -634.0,
+        "y": -232.0,
+        "normalized": {
+          "x": -0.93909955,
+          "y": -0.343645245,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 675.1148,
+        "sqrMagnitude": 455780.0
+      },
+      "UniqueName": "TestNode",
+      "Fields": "{\r\n  \"textInfo\": \"123\",\r\n  \"GUID\": null,\r\n  \"UniqueName\": null\r\n}"
+    },
+    {
+      "GUID": "7849c78f-c337-4577-8d2b-0b0bb981348b",
+      "Position": {
+        "x": 71.0,
+        "y": -91.0,
+        "normalized": {
+          "x": 0.615139544,
+          "y": -0.7884183,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 115.420967,
+        "sqrMagnitude": 13322.0
+      },
+      "UniqueName": "TestNode",
+      "Fields": "{\r\n  \"textInfo\": null,\r\n  \"GUID\": null,\r\n  \"UniqueName\": null\r\n}"
+    },
+    {
+      "GUID": "07fde8a3-faba-4ad3-90a6-457613591e8d",
+      "Position": {
+        "x": 646.0,
+        "y": -350.0,
+        "normalized": {
+          "x": 0.879244447,
+          "y": -0.4763708,
+          "magnitude": 1.0,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 734.721741,
+        "sqrMagnitude": 539816.0
+      },
+      "UniqueName": "TestNode",
+      "Fields": "{\r\n  \"textInfo\": \"\",\r\n  \"GUID\": null,\r\n  \"UniqueName\": null\r\n}"
+    }
+  ],
+  "links": [
+    {
+      "FromGUID": "c541daed-3bb8-467a-9676-225d8a74b1e1",
+      "ToGUID": "acf96be0-d330-4185-892e-245ea834c2a9",
+      "ToPort": "TestInput",
+      "FromPort": "TestOutput"
+    },
+    {
+      "FromGUID": "c541daed-3bb8-467a-9676-225d8a74b1e1",
+      "ToGUID": "7849c78f-c337-4577-8d2b-0b0bb981348b",
+      "ToPort": "TestInput",
+      "FromPort": "TestOutput2"
+    },
+    {
+      "FromGUID": "acf96be0-d330-4185-892e-245ea834c2a9",
+      "ToGUID": "07fde8a3-faba-4ad3-90a6-457613591e8d",
+      "ToPort": "TestInput",
+      "FromPort": "TestOutput2"
+    }
+  ]
+}
