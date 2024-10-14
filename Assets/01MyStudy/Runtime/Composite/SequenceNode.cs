@@ -23,8 +23,7 @@
                 var child = children[ExposedInt];
                 if (!child.Enable)
                 {
-                    ExposedInt = (ExposedInt + 1) % children.Count;
-                    continue;
+                    return State.Success;
                 }
 
                 switch (child.UpdateState())
@@ -32,7 +31,7 @@
                     case State.Failure:
                         return State.Failure;
                     case State.Success:
-                        ExposedInt = (ExposedInt + 1) % children.Count;
+                        return State.Success;
                         break;
                     case State.Running:
                         return State.Running;

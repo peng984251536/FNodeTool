@@ -1,4 +1,6 @@
-﻿namespace MyEditorView.Runtime
+﻿using System;
+
+namespace MyEditorView.Runtime
 {
     /// <summary>
     /// 执行所有子节点
@@ -36,12 +38,18 @@
                     }
                 }
             }
+
             return State.Success;
         }
-        
+
         protected override void OnStop()
         {
             currentIndex = 0;
+        }
+
+        public void OnSelectIndex(int index)
+        {
+            currentIndex = Math.Clamp(index, 0, children.Count - 1);
         }
     }
 }
