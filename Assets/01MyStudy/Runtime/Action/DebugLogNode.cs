@@ -11,5 +11,9 @@ namespace MyEditorView.Runtime
         {
             Debug.Log(stringValue);
         }
+
+        public DebugLogNode(BaseTree baseTree) : base(baseTree)
+        {
+        }
     }
 }

@@ -112,32 +112,32 @@ namespace MyEditorView.Runtime
                 }
                 else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
                 {
-                    editorNodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
-                    //nodeBase.outputContainer[0].name = 
-                    editorNodeBase.SetPosition(new Rect(
-                        nodeData.Position,
-                        m_targetGraphView.DefaultNodeSize
-                    ));
-                    var button = new Button(() =>
-                    {
-                        editorNodeBase.AddChoicePort(editorNodeBase);
-                    });
-                    button.text = "New Port";
-                    editorNodeBase.titleContainer.Add(button);
+                    // editorNodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
+                    // //nodeBase.outputContainer[0].name = 
+                    // editorNodeBase.SetPosition(new Rect(
+                    //     nodeData.Position,
+                    //     m_targetGraphView.DefaultNodeSize
+                    // ));
+                    // var button = new Button(() =>
+                    // {
+                    //     editorNodeBase.AddChoicePort(editorNodeBase);
+                    // });
+                    // button.text = "New Port";
+                    // editorNodeBase.titleContainer.Add(button);
                     
                     for (int i = 0; i < nodeData.InPortName.Length; i++)
                     {
                         //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
-                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
+                        //EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
                     }
                     for (int i = 0; i < nodeData.OutPortName.Length; i++)
                     {
                         //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
-                        editorNodeBase.AddChoicePort(editorNodeBase,nodeData.OutPortName[i]);
+                        //editorNodeBase.AddChoicePort(editorNodeBase,nodeData.OutPortName[i]);
                     }
                 }
                 
-                m_targetGraphView.AddElement(editorNodeBase);
+                //m_targetGraphView.AddElement(editorNodeBase);
 
                 // //初始化节点的输出接口
                 // var nodePorts = m_currentContainer.NodeLinks.Where(data => (nodeData.Guid == data.BaseNodeGuid))
@@ -151,9 +151,10 @@ namespace MyEditorView.Runtime
         /// </summary>
         private BaseNode CreateNodes(DialogueNodeData nodeData)
         {
-            Type type = Converter<nodeData.NodeType>
+            //Type type = Converter<nodeData.NodeType>
             
-            BaseNode baseNode = nodeData.NodeType.g
+            //BaseNode baseNode = nodeData.NodeType.g
+            return null;
         }
         
         #endregion
