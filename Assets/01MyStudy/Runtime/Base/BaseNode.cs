@@ -7,20 +7,6 @@ using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
-    [System.Serializable]
-    public class BaseNodeLinkData
-    {
-        public BaseNode sourceNode;
-        public string outputValueName;
-        public string inputValueName;
-
-        public BaseNodeLinkData(BaseNode sourceNode, string outputValueName, string inputValueName)
-        {
-            this.sourceNode = sourceNode;
-            this.outputValueName = outputValueName;
-            this.inputValueName = inputValueName;
-        }
-    }
     public abstract class BaseNode
     {
         public enum State
@@ -40,20 +26,34 @@ namespace MyEditorView.Runtime
         public BaseTree Owner
         {
             get => m_Owner;
-            set => m_Owner = value;
+            private set => m_Owner = value;
         }
 
         protected State m_nodeState;
         public State CurNodeState => m_nodeState;
 
         private bool m_started = false;
+        //是否是是启动状态
         public bool Started => m_started;
         
         private bool enable;
+        /// <summary>
+        /// 开关
+        /// </summary>
         public bool Enable { get => enable; set => enable = value; }
+        
+        [SerializeField, HideInInspector]
+        protected List<NodeLinkData> linkDatas = new List<NodeLinkData>();
+        [SerializeField, HideInInspector]
+        protected List<DialogueNodeData> nodeDatas = new List<DialogueNodeData>();
 
         #endregion
 
+        public BaseNode(BaseTree baseTree)
+        {
+            m_Owner = baseTree;
+        }
+        
         /// <summary>
         /// 重置状态
         /// </summary>
@@ -95,14 +95,6 @@ namespace MyEditorView.Runtime
             return m_nodeState;
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
         protected virtual void GetValue()
         {
             OnGetValue();
@@ -118,6 +110,7 @@ namespace MyEditorView.Runtime
         public abstract void AddChild(BaseNode baseNode);
         public abstract void RemoveChild(BaseNode baseNode);
         public abstract List<BaseNode> GetChildren();
+        
         
         
     }

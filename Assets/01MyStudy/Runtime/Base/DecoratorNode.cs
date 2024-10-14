@@ -61,5 +61,9 @@ namespace MyEditorView.Runtime
             else
                 return new List<BaseNode>();
         }
+
+        protected DecoratorNode(BaseTree baseTree) : base(baseTree)
+        {
+        }
     }
 }

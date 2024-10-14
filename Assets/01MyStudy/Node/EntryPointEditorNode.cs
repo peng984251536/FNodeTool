@@ -3,19 +3,19 @@ using UnityEditor.Experimental.GraphView;
 
 namespace MyEditorView
 {
-    public class EntryPointNode:NodeBase
+    public class EntryPointEditorNode:EditorNodeBase
     {
         // private EntryPointNode()
         // {
         //     
         // }
         
-        public EntryPointNode(GraphView graphView, string _guid=null): base(graphView,_guid)
+        public EntryPointEditorNode(GraphView graphView, string _guid=null): base(graphView,_guid)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();
             this.GUID = _guid;
-            var generatePort = NodeBase.GeneratePort(this, Direction.Output, "Next",Port.Capacity.Multi);
+            var generatePort = EditorNodeBase.GeneratePort(this, Direction.Output, "Next",Port.Capacity.Multi);
             //generatePort.portName = "Next";
             //node.outputContainer.Add(generatePort);
             //var generatePort2 = GeneratePort(node, Direction.Input, "Input");

@@ -51,5 +51,9 @@ namespace MyEditorView.Runtime
         {
             currentIndex = Math.Clamp(index, 0, children.Count - 1);
         }
+
+        public SelectorNode(BaseTree baseTree) : base(baseTree)
+        {
+        }
     }
 }

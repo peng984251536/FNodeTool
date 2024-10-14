@@ -40,7 +40,7 @@ namespace MyEditorView
                 new SearchTreeGroupEntry(new GUIContent("Dialogue"),1),
                 new SearchTreeEntry(new GUIContent("Dialogue Node",m_indentationIcon))
                 {
-                    userData = nameof(DialogueNode),level = 2
+                    userData = nameof(DialogueEditorNode),level = 2
                 }
                 
             };
@@ -65,7 +65,7 @@ namespace MyEditorView
             
             switch (SearchTreeEntry.userData)
             {
-                case nameof(DialogueNode):
+                case nameof(DialogueEditorNode):
                     Debug.Log(nameof(SearchTreeEntry.userData));
                     var node = m_DialogueView.CreateDialogueNode("Dialogue Node");
                     var rect = node.GetPosition();

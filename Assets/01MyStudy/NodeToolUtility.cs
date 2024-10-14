@@ -20,34 +20,34 @@ namespace MyEditorView
             return -1;
         }
 
-        public static string FindPortName(this List<NodeLinkData> nodeLinkDatas, string guid, Direction direction,int index)
-        {
-            int k = 0;
-            for (int i = 0; i < nodeLinkDatas.Count; i++)
-            {
-                if (direction == Direction.Input)
-                {
-                    if (nodeLinkDatas[i].InputNodeGuid == guid)
-                    {
-                        if(k==index)
-                            return nodeLinkDatas[i].InPortName;
-                        else
-                            k += 1;
-                    }
-                }
-                else if (direction == Direction.Output)
-                {
-                    if (nodeLinkDatas[i].OutputNodeGuid == guid)
-                    {
-                        if(k==index)
-                            return nodeLinkDatas[i].OutPortName;
-                        else
-                            k += 1;
-                    }
-                }
-            }
-
-            return "";
-        }
+        // public static string FindPortName(this List<NodeLinkData> nodeLinkDatas, string guid, Direction direction,int index)
+        // {
+        //     int k = 0;
+        //     for (int i = 0; i < nodeLinkDatas.Count; i++)
+        //     {
+        //         if (direction == Direction.Input)
+        //         {
+        //             if (nodeLinkDatas[i].InputNodeGuid == guid)
+        //             {
+        //                 if(k==index)
+        //                     return nodeLinkDatas[i].InPortName;
+        //                 else
+        //                     k += 1;
+        //             }
+        //         }
+        //         else if (direction == Direction.Output)
+        //         {
+        //             if (nodeLinkDatas[i].OutputNodeGuid == guid)
+        //             {
+        //                 if(k==index)
+        //                     return nodeLinkDatas[i].OutPortName;
+        //                 else
+        //                     k += 1;
+        //             }
+        //         }
+        //     }
+        //
+        //     return "";
+        // }
     }
 }

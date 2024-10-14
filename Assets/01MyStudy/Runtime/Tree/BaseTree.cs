@@ -14,7 +14,7 @@ namespace MyEditorView.Runtime
 
         public BaseNode rootNode;
         public BaseNode.State treeState;
-        public List<BaseNode> nodes = new List<BaseNode>(); //这棵树的所有节点
+        public Dictionary<string,BaseNode> nodes = new Dictionary<string,BaseNode>(); //这棵树的所有节点
 
         bool running;
         public Action onUpdateEvent;
@@ -27,7 +27,10 @@ namespace MyEditorView.Runtime
         {
             running = false;
             treeState = BaseNode.State.Default;
-            nodes.ForEach((i) => i.ResetState());
+            foreach (var baseNode in nodes.Values)
+            {
+                baseNode.ResetState();
+            }
             onUpdateEvent?.Invoke();
         }
 
@@ -72,5 +75,87 @@ namespace MyEditorView.Runtime
         {
             m_deleteTime = time;
         }
+        
+        #region 读取数据
+        
+        private DialogueContainer m_currentContainer;
+        
+        public void LoadGraph(string fileName)
+        {
+            m_currentContainer = Resources.Load<DialogueContainer>(fileName);
+            if (m_currentContainer == null)
+            {
+                EditorUtility.DisplayDialog("File Not Found", "找不到目标文件。", "Ok");
+                return;
+            }
+            
+            CreateNodes();
+        }
+        
+        /// <summary>
+        /// 在 view 加载保存的节点
+        /// </summary>
+        private void CreateNodes()
+        {
+            if(m_currentContainer==null)
+                return;
+            
+            //m_targetGraphView.GenerateEntryPointNode();
+            foreach (var nodeData in m_currentContainer.DialogueNodeDatas)
+            {
+                //创建一个节点
+                EditorNodeBase editorNodeBase;
+                
+                if (nodeData.InPortName.Length == 0||nodeData.NodeType.Contains(nameof(EntryPointEditorNode)))
+                {
+                    //nodes.Add(nodeBase.GUID,nodeData);
+                }
+                else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
+                {
+                    editorNodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
+                    //nodeBase.outputContainer[0].name = 
+                    editorNodeBase.SetPosition(new Rect(
+                        nodeData.Position,
+                        m_targetGraphView.DefaultNodeSize
+                    ));
+                    var button = new Button(() =>
+                    {
+                        editorNodeBase.AddChoicePort(editorNodeBase);
+                    });
+                    button.text = "New Port";
+                    editorNodeBase.titleContainer.Add(button);
+                    
+                    for (int i = 0; i < nodeData.InPortName.Length; i++)
+                    {
+                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
+                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
+                    }
+                    for (int i = 0; i < nodeData.OutPortName.Length; i++)
+                    {
+                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
+                        editorNodeBase.AddChoicePort(editorNodeBase,nodeData.OutPortName[i]);
+                    }
+                }
+                
+                m_targetGraphView.AddElement(editorNodeBase);
+
+                // //初始化节点的输出接口
+                // var nodePorts = m_currentContainer.NodeLinks.Where(data => (nodeData.Guid == data.BaseNodeGuid))
+                //     .ToList();
+                // nodePorts.ForEach((data => m_targetGraphView.AddChoicePort(tempNode, data.PortName)));
+            }
+        }
+        
+        /// <summary>
+        /// 在 view 加载保存的节点
+        /// </summary>
+        private BaseNode CreateNodes(DialogueNodeData nodeData)
+        {
+            Type type = Converter<nodeData.NodeType>
+            
+            BaseNode baseNode = nodeData.NodeType.g
+        }
+        
+        #endregion
     }
 }

@@ -76,11 +76,11 @@ namespace MyEditorView
 
         #region 创建节点
 
-        public EntryPointNode GenerateEntryPointNode(string guid = "")
+        public EntryPointEditorNode GenerateEntryPointNode(string guid = "")
         {
             if (guid == "")
                 guid = Guid.NewGuid().ToString();
-            var node = new EntryPointNode(this,guid)
+            var node = new EntryPointEditorNode(this,guid)
             {
                 title = "START",
                 DialogueText = "ENTRYPOINT",
@@ -95,11 +95,11 @@ namespace MyEditorView
         /// </summary>
         /// <param name="nodeName"></param>
         /// <returns></returns>
-        public DialogueNode CreateDialogueNode(string nodeName, string _guid=null)
+        public DialogueEditorNode CreateDialogueNode(string nodeName, string _guid=null)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();
-            var dialogueNode = new DialogueNode(this,_guid)
+            var dialogueNode = new DialogueEditorNode(this,_guid)
             {
                 title = nodeName,
                 DialogueText = nodeName,
@@ -114,9 +114,9 @@ namespace MyEditorView
         /// </summary>
         /// <param name="nodeName"></param>
         /// <returns></returns>
-        public NodeBase CreateNodeBase(string nodeName,string guid)
+        public EditorNodeBase CreateNodeBase(string nodeName,string guid)
         {
-            var dialogueNode = new NodeBase(this,guid)
+            var dialogueNode = new EditorNodeBase(this,guid)
             {
                 title = nodeName,
                 DialogueText = nodeName,

@@ -8,22 +8,22 @@ namespace MyEditorView
     /// <summary>
     /// 编辑器节点
     /// </summary>
-    public class DialogueNode:NodeBase
+    public class DialogueEditorNode:EditorNodeBase
     {
         // private DialogueNode()
         // {
         //     
         // }
         
-        public DialogueNode(GraphView graphView, string _guid=null): base(graphView,_guid)
+        public DialogueEditorNode(GraphView graphView, string _guid=null): base(graphView,_guid)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();
             this.GUID = _guid;
             m_graphView = graphView;
             //输入输出
-            var inputPort1 = NodeBase.GeneratePort(this, Direction.Input, "Input");
-            var inputPort2 = NodeBase.GeneratePort(this, Direction.Input, "Input2");
+            var inputPort1 = EditorNodeBase.GeneratePort(this, Direction.Input, "Input");
+            var inputPort2 = EditorNodeBase.GeneratePort(this, Direction.Input, "Input2");
             //var inputPort3 = GeneratePort(dialogueNode, Direction.Output, "Onput", Port.Capacity.Multi);
             AddChoicePort(this);
 

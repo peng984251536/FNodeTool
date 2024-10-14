@@ -11,5 +11,7 @@ namespace MyEditorView.Runtime
         public List<NodeLinkData> NodeLinks = new List<NodeLinkData>();
         //节点数据
         public List<DialogueNodeData> DialogueNodeDatas = new List<DialogueNodeData>();
+        
+        public Dictionary<string,BaseNode> BaseNodes = new Dictionary<string,BaseNode>();
     }
 }

@@ -12,15 +12,16 @@ namespace MyEditorView.Runtime
         public string Guid;
         public string DialogueText;
         public Vector2 Position;
+
         
         /// <summary>
         /// output-输出
         /// </summary>
-        public int  OutputCount;
-        
+        public string[] OutPortName;
+
         /// <summary>
         /// intput-输入
         /// </summary>
-        public int  InputCount;
+        public string[] InPortName;
     }
 }

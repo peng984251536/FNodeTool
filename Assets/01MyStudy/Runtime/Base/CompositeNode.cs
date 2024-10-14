@@ -36,5 +36,9 @@ namespace MyEditorView.Runtime
         {
             return children;
         }
+
+        protected CompositeNode(BaseTree baseTree) : base(baseTree)
+        {
+        }
     }
 }

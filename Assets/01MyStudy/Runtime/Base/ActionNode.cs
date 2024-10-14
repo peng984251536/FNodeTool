@@ -35,5 +35,9 @@ namespace MyEditorView.Runtime
         protected abstract void DoAction();
         public sealed override void AddChild(BaseNode baseNode) { }
         public sealed override void RemoveChild(BaseNode baseNode) { }
+
+        protected ActionNode(BaseTree baseTree) : base(baseTree)
+        {
+        }
     }
 }

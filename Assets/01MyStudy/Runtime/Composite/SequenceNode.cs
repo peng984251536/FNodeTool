@@ -1,8 +1,10 @@
 ﻿namespace MyEditorView.Runtime
 {
     /// <summary>
-    /// 执行所有子节点
+    /// 按顺序执行所有子节点
     /// </summary>
+    [NodeName("SequenceNode")]
+    [NodePath("Base/Composite/SequenceNode")]
     public class SequenceNode : CompositeNode
     {
         
@@ -44,6 +46,10 @@
         protected override void OnStop()
         {
             ExposedInt = 0;
+        }
+
+        public SequenceNode(BaseTree baseTree) : base(baseTree)
+        {
         }
     }
 }

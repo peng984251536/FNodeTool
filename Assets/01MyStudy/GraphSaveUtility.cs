@@ -19,7 +19,7 @@ namespace MyEditorView
         private List<Edge> Edges => m_targetGraphView.edges.ToList();
 
         //DialogueView 内部的节点
-        private List<NodeBase> Nodes => m_targetGraphView.nodes.ToList().Cast<NodeBase>().ToList();
+        private List<EditorNodeBase> Nodes => m_targetGraphView.nodes.ToList().Cast<EditorNodeBase>().ToList();
 
         public static GraphSaveUtility GetInstance(DialogueView targetGraphView)
         {
@@ -42,17 +42,18 @@ namespace MyEditorView
             for (int i = 0; i < connectedPorts.Length; i++)
             {
                 Edge curEdge = connectedPorts[i];
-                var outputNode = curEdge.output.node as NodeBase;
-                var inputNode = curEdge.input.node as NodeBase;
+                var outputNode = curEdge.output.node as EditorNodeBase;
+                var inputNode = curEdge.input.node as EditorNodeBase;
 
                 //接口
                 var outputCount = outputNode.outputContainer.FindPort(curEdge.output);
                 var intputCount = inputNode.inputContainer.FindPort(curEdge.input);
                 
+                //保存连线数据
                 dialogueContainer.NodeLinks.Add(new NodeLinkData()
                 {
-                    OutPortName = curEdge.output.portName,
-                    InPortName = curEdge.input.portName,
+                    //OutPortName = curEdge.output.portName,
+                    //InPortName = curEdge.input.portName,
                     
                     OutputNodeGuid = outputNode.GUID,
                     OutputNodeIndex = outputCount,
@@ -61,10 +62,21 @@ namespace MyEditorView
                 });
             }
 
-            //保存 节点的信息
+            //保存 节点数据
             //foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
             foreach (var dialogueNode in Nodes)
             {
+                string[] _OutPortName = new string[dialogueNode.outputContainer.childCount];
+                for (int i = 0; i < _OutPortName.Length; i++)
+                {
+                    _OutPortName[i] = dialogueNode.outputContainer[i].name;
+                }
+                string[] _InPortName = new string[dialogueNode.inputContainer.childCount];
+                for (int i = 0; i < _InPortName.Length; i++)
+                {
+                    _InPortName[i] = dialogueNode.inputContainer[i].name;
+                }
+                
                 dialogueContainer.DialogueNodeDatas.Add(new DialogueNodeData()
                 {
                     Guid = dialogueNode.GUID,
@@ -72,8 +84,8 @@ namespace MyEditorView
                     Position = dialogueNode.GetPosition().position,
                     
                     NodeType = dialogueNode.GetType().ToString(),
-                    OutputCount = dialogueNode.outputContainer.childCount,
-                    InputCount = dialogueNode.inputContainer.childCount,
+                    OutPortName = _OutPortName,
+                    InPortName = _InPortName,
                     
                 });
             }
@@ -164,7 +176,7 @@ namespace MyEditorView
         }
         
         /// <summary>
-        /// 为 view 创建新节点
+        /// 在 view 加载保存的节点
         /// </summary>
         private void CreateNodes()
         {
@@ -172,69 +184,45 @@ namespace MyEditorView
             foreach (var nodeData in m_currentContainer.DialogueNodeDatas)
             {
                 //创建一个节点
-                NodeBase nodeBase;
+                EditorNodeBase editorNodeBase;
                 
-                if (nodeData.InputCount == 0||nodeData.NodeType.Contains(nameof(EntryPointNode)))
+                if (nodeData.InPortName.Length == 0||nodeData.NodeType.Contains(nameof(EntryPointEditorNode)))
                 {
-                    nodeBase = m_targetGraphView.GenerateEntryPointNode(nodeData.Guid);
-                    nodeBase.SetPosition(new Rect(
+                    editorNodeBase = m_targetGraphView.GenerateEntryPointNode(nodeData.Guid);
+                    editorNodeBase.SetPosition(new Rect(
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
-                    nodeBase.EntryPoint = true;
+                    editorNodeBase.EntryPoint = true;
                 }
-                else if(nodeData.NodeType.Contains(nameof(DialogueNode)))
+                else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
                 {
-                    nodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
+                    editorNodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
                     //nodeBase.outputContainer[0].name = 
-                    nodeBase.SetPosition(new Rect(
+                    editorNodeBase.SetPosition(new Rect(
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
                     var button = new Button(() =>
                     {
-                        nodeBase.AddChoicePort(nodeBase);
+                        editorNodeBase.AddChoicePort(editorNodeBase);
                     });
                     button.text = "New Port";
-                    nodeBase.titleContainer.Add(button);
+                    editorNodeBase.titleContainer.Add(button);
                     
-                    for (int i = 0; i < nodeData.InputCount; i++)
+                    for (int i = 0; i < nodeData.InPortName.Length; i++)
                     {
-                        string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
-                        NodeBase.GeneratePort(nodeBase, Direction.Input, name);
+                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
+                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
                     }
-                    for (int i = 0; i < nodeData.OutputCount; i++)
+                    for (int i = 0; i < nodeData.OutPortName.Length; i++)
                     {
-                        string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
-                        nodeBase.AddChoicePort(nodeBase,name);
-                    }
-                }
-                else
-                {
-                    nodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText,nodeData.Guid);
-                    nodeBase.SetPosition(new Rect(
-                        nodeData.Position,
-                        m_targetGraphView.DefaultNodeSize
-                    ));
-                    for (int i = 0; i < nodeData.InputCount; i++)
-                    {
-                        string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
-                        NodeBase.GeneratePort(nodeBase, Direction.Input, name,Port.Capacity.Multi);
-                    }
-                    for (int i = 0; i < nodeData.OutputCount; i++)
-                    {
-                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid);
-                        //NodeBase.GeneratePort(nodeBase, Direction.Output, name);
-                        string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
-                        var button = new Button(() =>
-                        {
-                            nodeBase.AddChoicePort(nodeBase,name);
-                        });
-                        //button.text = "New Port";
-                        nodeBase.titleContainer.Add(button);
+                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
+                        editorNodeBase.AddChoicePort(editorNodeBase,nodeData.OutPortName[i]);
                     }
                 }
-                m_targetGraphView.AddElement(nodeBase);
+                
+                m_targetGraphView.AddElement(editorNodeBase);
 
                 // //初始化节点的输出接口
                 // var nodePorts = m_currentContainer.NodeLinks.Where(data => (nodeData.Guid == data.BaseNodeGuid))
@@ -244,16 +232,16 @@ namespace MyEditorView
         }
 
         #region 创建对应的节点类型
-        private EntryPointNode CreateEntryNode(string dialogueName,string guid,Vector3 position)
+        private EntryPointEditorNode CreateEntryNode(string dialogueName,string guid,Vector3 position)
         {
-            EntryPointNode nodeBase;
-            nodeBase = m_targetGraphView.GenerateEntryPointNode(guid);
-            nodeBase.SetPosition(new Rect(
+            EntryPointEditorNode editorNodeBase;
+            editorNodeBase = m_targetGraphView.GenerateEntryPointNode(guid);
+            editorNodeBase.SetPosition(new Rect(
                 position,
                 m_targetGraphView.DefaultNodeSize
             ));
-            nodeBase.EntryPoint = true;
-            return nodeBase;
+            editorNodeBase.EntryPoint = true;
+            return editorNodeBase;
         }
         
 
@@ -289,7 +277,7 @@ namespace MyEditorView
                 Edges.Where(getEdgeFunc).ToList().ForEach(removeEdgeAction);
             }
 
-            Action<NodeBase> removeNodeAction = Node => { m_targetGraphView.RemoveElement(Node); };
+            Action<EditorNodeBase> removeNodeAction = Node => { m_targetGraphView.RemoveElement(Node); };
             Nodes.ForEach(removeNodeAction);
         }
         #endregion
