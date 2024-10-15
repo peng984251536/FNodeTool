@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MyEditorView.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -107,6 +108,24 @@ namespace MyEditorView
 
             return dialogueNode;
 
+        }
+        
+        /// <summary>
+        /// 在view中创建节点
+        /// </summary>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
+        public DefaultEditorNode CreateDefaultNode(BaseNode baseNode)
+        {
+            var nodeName = (baseNode.GetType().GetCustomAttributes(typeof(NodeName), false)[0] as NodeName).Name;
+            string _guid = Guid.NewGuid().ToString();
+            var dialogueNode = new DefaultEditorNode(this,baseNode,_guid)
+            {
+                title = nodeName,
+                DialogueText = nodeName,
+            };
+
+            return dialogueNode;
         }
         
         /// <summary>

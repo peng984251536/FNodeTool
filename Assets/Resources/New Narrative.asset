@@ -13,46 +13,51 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   NodeLinks:
-  - OutPortName: Choice 1
-    InPortName: Input
-    OutputNodeGuid: 8a9c8112-1305-423f-9003-18bb70a85d0f
+  - OutputNodeGuid: f7d453c6-500c-4201-8f9f-70e360c0cfc8
     OutputNodeIndex: 0
-    InputNodeGuid: 7031a3f0-81d5-46cc-98d9-c2ddff4a73e9
+    InputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
     InputNodeIndex: 0
-  - OutPortName: Choice 2
-    InPortName: Input2
-    OutputNodeGuid: 8a9c8112-1305-423f-9003-18bb70a85d0f
-    OutputNodeIndex: 1
-    InputNodeGuid: 7031a3f0-81d5-46cc-98d9-c2ddff4a73e9
-    InputNodeIndex: 1
-  - OutPortName: Next
-    InPortName: Input
-    OutputNodeGuid: 47489298-a71e-46c9-a86c-75441f547117
+  - OutputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
     OutputNodeIndex: 0
-    InputNodeGuid: 8a9c8112-1305-423f-9003-18bb70a85d0f
+    InputNodeGuid: 49771b5c-78c4-4ceb-bfd0-1987cebffb65
     InputNodeIndex: 0
-  - OutPortName: Next
-    InPortName: Input2
-    OutputNodeGuid: 47489298-a71e-46c9-a86c-75441f547117
+  - OutputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
     OutputNodeIndex: 0
-    InputNodeGuid: 8a9c8112-1305-423f-9003-18bb70a85d0f
-    InputNodeIndex: 1
+    InputNodeGuid: 4fde5b98-9fd3-4756-9d47-40130918c05c
+    InputNodeIndex: 0
   DialogueNodeDatas:
-  - NodeType: MyEditorView.EntryPointNode
-    Guid: 47489298-a71e-46c9-a86c-75441f547117
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EntryPointEditorNode
+    Guid: f7d453c6-500c-4201-8f9f-70e360c0cfc8
     DialogueText: ENTRYPOINT
     Position: {x: 100, y: 200}
-    OutputCount: 1
-    InputCount: 0
-  - NodeType: MyEditorView.DialogueNode
-    Guid: 8a9c8112-1305-423f-9003-18bb70a85d0f
-    DialogueText: Dialogue Node
-    Position: {x: 267, y: 200}
-    OutputCount: 2
-    InputCount: 2
-  - NodeType: MyEditorView.DialogueNode
-    Guid: 7031a3f0-81d5-46cc-98d9-c2ddff4a73e9
-    DialogueText: Dialogue Node
-    Position: {x: 514, y: 200}
-    OutputCount: 1
-    InputCount: 2
+    OutPortName:
+    - 
+    InPortName: []
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.DefaultEditorNode
+    Guid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
+    DialogueText: SequenceNode
+    Position: {x: 237, y: 200}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.DefaultEditorNode
+    Guid: 49771b5c-78c4-4ceb-bfd0-1987cebffb65
+    DialogueText: WaitNode
+    Position: {x: 436, y: 86}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.DefaultEditorNode
+    Guid: 4fde5b98-9fd3-4756-9d47-40130918c05c
+    DialogueText: WaitNode
+    Position: {x: 436, y: 260}
+    OutPortName:
+    - 
+    InPortName:
+    - 

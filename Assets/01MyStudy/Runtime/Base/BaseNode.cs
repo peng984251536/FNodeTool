@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
-    public abstract class BaseNode
+    public abstract class BaseNode: ScriptableObject
     {
         public enum State
         {
@@ -45,7 +45,7 @@ namespace MyEditorView.Runtime
         [SerializeField, HideInInspector]
         protected List<NodeLinkData> linkDatas = new List<NodeLinkData>();
         [SerializeField, HideInInspector]
-        protected List<DialogueNodeData> nodeDatas = new List<DialogueNodeData>();
+        protected List<NodeData> nodeDatas = new List<NodeData>();
 
         #endregion
 

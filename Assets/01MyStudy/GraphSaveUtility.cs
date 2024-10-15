@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FNode.Editor;
 using MyEditorView.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using NodeData = MyEditorView.Runtime.NodeData;
 
 namespace MyEditorView
 {
@@ -66,6 +68,21 @@ namespace MyEditorView
             //foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
             foreach (var dialogueNode in Nodes)
             {
+                DefaultEditorNode defaultEditorNode = dialogueNode as DefaultEditorNode;
+                if (defaultEditorNode != null)
+                {
+                    Port outputPort = defaultEditorNode.outputContainer[0].Q<Port>();
+                    for (int i = 0; i < Nodes.Count; i++)
+                    {
+                        DefaultEditorNode _node = Nodes[i] as DefaultEditorNode;
+                        if(_node==null)
+                            continue;
+                        Port inputPort = _node.inputContainer[0].Q<Port>();
+                        if(inputPort==outputPort)
+                            defaultEditorNode.BaseNode.AddChild(Nodes[i].BaseNode);
+                    }
+                }
+                
                 string[] _OutPortName = new string[dialogueNode.outputContainer.childCount];
                 for (int i = 0; i < _OutPortName.Length; i++)
                 {
@@ -77,8 +94,9 @@ namespace MyEditorView
                     _InPortName[i] = dialogueNode.inputContainer[i].name;
                 }
                 
-                dialogueContainer.DialogueNodeDatas.Add(new DialogueNodeData()
+                dialogueContainer.DialogueNodeDatas.Add(new NodeData()
                 {
+                    userData = defaultEditorNode?.BaseNode,
                     Guid = dialogueNode.GUID,
                     DialogueText = dialogueNode.DialogueText,
                     Position = dialogueNode.GetPosition().position,
@@ -127,6 +145,17 @@ namespace MyEditorView
                 return;
             }
 
+            ClearGraph();
+            CreateNodes();
+            ConnectNodes();
+        }
+        public void LoadGraph(DialogueContainer container)
+        {
+            if(container==null)
+                return;
+            
+            m_currentContainer = container;
+            
             ClearGraph();
             CreateNodes();
             ConnectNodes();
@@ -197,28 +226,22 @@ namespace MyEditorView
                 }
                 else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
                 {
-                    editorNodeBase = m_targetGraphView.CreateNodeBase(nodeData.DialogueText, nodeData.Guid);
-                    //nodeBase.outputContainer[0].name = 
+                    editorNodeBase = new EditorNodeBase(m_targetGraphView, nodeData.Guid);
+                    editorNodeBase.title = nodeData.DialogueText;
+                    editorNodeBase.DialogueText = nodeData.DialogueText;
                     editorNodeBase.SetPosition(new Rect(
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
-                    var button = new Button(() =>
-                    {
-                        editorNodeBase.AddChoicePort(editorNodeBase);
-                    });
-                    button.text = "New Port";
-                    editorNodeBase.titleContainer.Add(button);
+                    m_targetGraphView.AddElement(editorNodeBase);
                     
                     for (int i = 0; i < nodeData.InPortName.Length; i++)
                     {
-                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Input,i);
                         EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
                     }
                     for (int i = 0; i < nodeData.OutPortName.Length; i++)
                     {
-                        //string name = m_currentContainer.NodeLinks.FindPortName(nodeData.Guid,Direction.Output,i);
-                        editorNodeBase.AddChoicePort(editorNodeBase,nodeData.OutPortName[i]);
+                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Output, nodeData.OutPortName[i],Port.Capacity.Multi);
                     }
                 }
                 

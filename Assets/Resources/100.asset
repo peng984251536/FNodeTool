@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1233f870b24d7788a6f55e20a4e0f8, type: 3}
+  m_Name: 100
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - OutputNodeGuid: fe6f1d01-65f4-4fb5-8a6e-4f94d0b4030d
+    OutputNodeIndex: 0
+    InputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    InputNodeIndex: 0
+  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    OutputNodeIndex: 0
+    InputNodeGuid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
+    InputNodeIndex: 0
+  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    OutputNodeIndex: 0
+    InputNodeGuid: 8ab41c30-e00d-4a56-8a14-ca0d99a30db9
+    InputNodeIndex: 0
+  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    OutputNodeIndex: 0
+    InputNodeGuid: 6f27bdf8-3fc9-4cc8-a912-309c2622521d
+    InputNodeIndex: 0
+  DialogueNodeDatas:
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EntryPointEditorNode
+    Guid: fe6f1d01-65f4-4fb5-8a6e-4f94d0b4030d
+    DialogueText: ENTRYPOINT
+    Position: {x: 100, y: 200}
+    OutPortName:
+    - 
+    InPortName: []
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    DialogueText: RandomSelectorNode
+    Position: {x: 237, y: 200}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
+    DialogueText: DebugLogNode
+    Position: {x: 454, y: 48}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 8ab41c30-e00d-4a56-8a14-ca0d99a30db9
+    DialogueText: DebugLogNode
+    Position: {x: 454, y: 186}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 6f27bdf8-3fc9-4cc8-a912-309c2622521d
+    DialogueText: DebugLogNode
+    Position: {x: 454, y: 344}
+    OutPortName:
+    - 
+    InPortName:
+    - 

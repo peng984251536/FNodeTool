@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [NodeName("RandomSelectorNode")]
+    [NodePath("Base/RandomSelectorNode")]
     public class RandomSelectorNode : CompositeNode
     {
         protected override void OnReset()

@@ -11,6 +11,8 @@ namespace MyEditorView.Runtime
     /// <summary>
     /// 单输出接口(组合)
     /// </summary>
+    [NodeName("CompositeNode")]
+    [NodePath("Base/Composite/CompositeNode")]
     public abstract class CompositeNode:BaseNode,ICompositeNode
     {
         [SerializeField, HideInInspector]

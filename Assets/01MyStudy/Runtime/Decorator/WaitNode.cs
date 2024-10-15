@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
+    
+    [NodeName("WaitNode")]
+    [NodePath("Base/WaitNode")]
     public class WaitNode : DecoratorNode
     {
         public float duration = 1;

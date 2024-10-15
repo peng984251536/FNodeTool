@@ -22,9 +22,10 @@ namespace MyEditorView
             //generatePort.portName = "Next";
             //node.outputContainer.Add(generatePort);
 
+            
+            
             this.RefreshExpandedState();
             this.RefreshPorts();
-
             this.SetPosition(new UnityEngine.Rect(100, 200, 100, 150));
             
             graphView.AddElement(this);

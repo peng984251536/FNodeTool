@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using FNode.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
     [Serializable]
-    public class DialogueNodeData
+    public class NodeData
     {
+        public MyEditorView.Runtime.BaseNode userData;
         public string NodeType;
         public string Guid;
         public string DialogueText;
