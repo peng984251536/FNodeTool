@@ -7,7 +7,14 @@ namespace MyEditorView.Runtime
     [NodePath("Base/DebugLogNode")]
     public class DebugLogNode : ActionNode
     {
-        public string stringValue;
+        [HideInInspector][SerializeField]
+        public string stringValue = string.Empty;
+        
+        [Header("≤‚ ‘")]
+        public string stringValue2 = string.Empty;
+        
+        [HideInInspector][SerializeField]
+        private string stringValue3 = string.Empty;
 
         protected override void DoAction()
         {

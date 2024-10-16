@@ -49,15 +49,6 @@ MonoBehaviour:
     - 
   - userData: {fileID: 0}
     NodeType: MyEditorView.EditorNodeBase
-    Guid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
-    DialogueText: DebugLogNode
-    Position: {x: 454, y: 48}
-    OutPortName:
-    - 
-    InPortName:
-    - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.EditorNodeBase
     Guid: 8ab41c30-e00d-4a56-8a14-ca0d99a30db9
     DialogueText: DebugLogNode
     Position: {x: 454, y: 186}
@@ -70,6 +61,15 @@ MonoBehaviour:
     Guid: 6f27bdf8-3fc9-4cc8-a912-309c2622521d
     DialogueText: DebugLogNode
     Position: {x: 454, y: 344}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: 0}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
+    DialogueText: DebugLogNode
+    Position: {x: 454, y: 48}
     OutPortName:
     - 
     InPortName:

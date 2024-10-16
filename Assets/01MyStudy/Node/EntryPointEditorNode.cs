@@ -10,7 +10,7 @@ namespace MyEditorView
         //     
         // }
         
-        public EntryPointEditorNode(GraphView graphView, string _guid=null): base(graphView,_guid)
+        public EntryPointEditorNode(DialogueView graphView, string _guid=null): base(graphView,_guid)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();

@@ -47,6 +47,7 @@ namespace MyEditorView.Runtime
         [SerializeField, HideInInspector]
         protected List<NodeData> nodeDatas = new List<NodeData>();
 
+        public string testValue = "oooooooooooooo";
         #endregion
 
         public BaseNode(BaseTree baseTree)

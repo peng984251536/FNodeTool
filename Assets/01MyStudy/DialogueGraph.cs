@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using MyEditorView.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -6,6 +8,7 @@ using UnityEditor.UIElements;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityGameFramework.Runtime;
 
 namespace MyEditorView
 {
@@ -123,30 +126,7 @@ namespace MyEditorView
         private void GenerateBlackBoard()
         {
             var blackboard = new Blackboard(m_DialogueView);
-            blackboard.Add(new BlackboardSection(){title = "Exposed Properties"});
-            //给这个属性板-添加属性
-            blackboard.addItemRequested = blackboard =>
-            {
-                m_DialogueView.AddPropertyToBlackBoard(new ExposedProperty());
-            };
-            //编辑这个text的属性
-            blackboard.editTextRequested = (blackboard1, element, newValue) =>
-            {
-                var oldPropertyName = ((BlackboardField)element).text;
-                if (m_DialogueView.ExposedProperties.Any(x => x.PropertyName == newValue))
-                {
-                    EditorUtility.DisplayDialog("Error", "已经有这个属性了", "OK");
-                    return;
-                }
-
-                var propertyIndex = m_DialogueView.ExposedProperties.FindIndex
-                (
-                    x => x.PropertyName == oldPropertyName
-                );
-                m_DialogueView.ExposedProperties[propertyIndex].PropertyName = newValue;
-                ((BlackboardField)element).text = newValue;
-            };
-            blackboard.SetPosition(new Rect(10,30,200,300));
+            InitBlackBoard(m_DialogueView,blackboard);
             m_DialogueView.Blackboard = blackboard;
             m_DialogueView.Add(blackboard);
         }
@@ -174,14 +154,57 @@ namespace MyEditorView
         }
 
 
-        #region 操作
+        #region 点击节点
 
-        protected virtual void SelectData(DialogueContainer container)
+        public virtual void OnSelectNode(EditorNodeBase nodeBase)
         {
-            Selection.activeObject = container;
+            InspectClassProperties(nodeBase.BaseNode);
+        }
+
+        public virtual void InspectClassProperties(BaseNode baseNode)
+        {
+            PropertyInfo[] properties = baseNode.GetType().GetProperties(BindingFlags.Public);
+
+            foreach (var property in properties)
+            {
+                var v = property.Attributes;
+                Log.Debug($"InspectClassProperties:type:{property.PropertyType}--value:{property.GetType()}");
+            }
+            
         }
 
         #endregion
-        
+
+        #region 静态工具
+
+        public static void InitBlackBoard(DialogueView graphView,Blackboard blackboard)
+        {
+            blackboard.Add(new BlackboardSection(){title = "Exposed Properties"});
+            //给这个属性板-添加属性
+            blackboard.addItemRequested = blackboard =>
+            {
+                graphView.AddPropertyToBlackBoard(new ExposedProperty());
+            };
+            //编辑这个text的属性
+            blackboard.editTextRequested = (blackboard1, element, newValue) =>
+            {
+                var oldPropertyName = ((BlackboardField)element).text;
+                if (graphView.ExposedProperties.Any(x => x.PropertyName == newValue))
+                {
+                    EditorUtility.DisplayDialog("Error", "已经有这个属性了", "OK");
+                    return;
+                }
+
+                var propertyIndex = graphView.ExposedProperties.FindIndex
+                (
+                    x => x.PropertyName == oldPropertyName
+                );
+                graphView.ExposedProperties[propertyIndex].PropertyName = newValue;
+                ((BlackboardField)element).text = newValue;
+            };
+            blackboard.SetPosition(new Rect(10,30,200,300));
+        }
+
+        #endregion
     }
 }

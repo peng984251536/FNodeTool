@@ -222,6 +222,7 @@ namespace MyEditorView
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
+                    editorNodeBase.BaseNode = nodeData.userData;
                     editorNodeBase.EntryPoint = true;
                 }
                 else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
@@ -233,6 +234,7 @@ namespace MyEditorView
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
+                    editorNodeBase.BaseNode = nodeData.userData;
                     m_targetGraphView.AddElement(editorNodeBase);
                     
                     for (int i = 0; i < nodeData.InPortName.Length; i++)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using MyEditorView.Runtime;
+using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -18,10 +20,10 @@ namespace MyEditorView
         public UnityEngine.Vector2 m_defaultNodeSize = new UnityEngine.Vector2(100, 200);
         public Blackboard Blackboard;
         public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
-        
+
         private NodeSearchWindow m_searchWindow;
         private EditorWindow m_EditorWindow;
-        
+
 
         public UnityEngine.Vector2 DefaultNodeSize
         {
@@ -70,6 +72,7 @@ namespace MyEditorView
 
                 compatiblePorts.Add(port);
             }
+
             return compatiblePorts;
         }
 
@@ -81,13 +84,13 @@ namespace MyEditorView
         {
             if (guid == "")
                 guid = Guid.NewGuid().ToString();
-            var node = new EntryPointEditorNode(this,guid)
+            var node = new EntryPointEditorNode(this, guid)
             {
                 title = "START",
                 DialogueText = "ENTRYPOINT",
                 EntryPoint = true
             };
-            
+
             return node;
         }
 
@@ -96,20 +99,19 @@ namespace MyEditorView
         /// </summary>
         /// <param name="nodeName"></param>
         /// <returns></returns>
-        public DialogueEditorNode CreateDialogueNode(string nodeName, string _guid=null)
+        public DialogueEditorNode CreateDialogueNode(string nodeName, string _guid = null)
         {
-            if(_guid==null)
+            if (_guid == null)
                 _guid = Guid.NewGuid().ToString();
-            var dialogueNode = new DialogueEditorNode(this,_guid)
+            var dialogueNode = new DialogueEditorNode(this, _guid)
             {
                 title = nodeName,
                 DialogueText = nodeName,
             };
 
             return dialogueNode;
-
         }
-        
+
         /// <summary>
         /// 在view中创建节点
         /// </summary>
@@ -119,7 +121,7 @@ namespace MyEditorView
         {
             var nodeName = (baseNode.GetType().GetCustomAttributes(typeof(NodeName), false)[0] as NodeName).Name;
             string _guid = Guid.NewGuid().ToString();
-            var dialogueNode = new DefaultEditorNode(this,baseNode,_guid)
+            var dialogueNode = new DefaultEditorNode(this, baseNode, _guid)
             {
                 title = nodeName,
                 DialogueText = nodeName,
@@ -127,27 +129,97 @@ namespace MyEditorView
 
             return dialogueNode;
         }
-        
+
         /// <summary>
         /// 在view中创建节点
         /// </summary>
         /// <param name="nodeName"></param>
         /// <returns></returns>
-        public EditorNodeBase CreateNodeBase(string nodeName,string guid)
+        public EditorNodeBase CreateNodeBase(string nodeName, string guid)
         {
-            var dialogueNode = new EditorNodeBase(this,guid)
+            var dialogueNode = new EditorNodeBase(this, guid)
             {
                 title = nodeName,
                 DialogueText = nodeName,
             };
 
             return dialogueNode;
-
         }
 
         #endregion
 
+        #region 点击节点
+
+        private FieldInfo[] m_nodeFields = null;
+        private BaseNode m_curBaseNode = null;
+        
+        /// <summary>
+        /// 刷新点击的节点
+        /// </summary>
+        /// <param name="nodeBase"></param>
+        public virtual void OnSelectNode(EditorNodeBase nodeBase)
+        {
+            m_curBaseNode = nodeBase.BaseNode;
+            InspectClassProperties(nodeBase.BaseNode);
+        }
+
+        public virtual void InspectClassProperties(BaseNode baseNode)
+        {
+            Type type = baseNode.GetType();
+
+            m_nodeFields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+            
+            // PropertyInfo[] properties = (type)
+            //     .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            foreach (var property in m_nodeFields)
+            {
+                UnityEngine.Debug.Log(
+                    $"InspectClassProperties:type:{property.Name}--value:{property.FieldType}");
+                var attributes = property.GetCustomAttributes(true);
+                for (int i = 0; i < attributes.Length; i++)
+                {
+                    Debug.Log($"---->> CustomAttributes:{attributes[i]}");
+                }
+            }
+        }
+
+        public virtual void UpdateBlackboardProperty()
+        {
+            DialogueGraph.InitBlackBoard(this,Blackboard);
+
+            for (int i = 0; i < m_nodeFields.Length; i++)
+            {
+                FieldInfo fieldInfo = m_nodeFields[i];
+                ExposedProperty property = new ExposedProperty();
+                property.PropertyName = fieldInfo.Name;
+
+                #region 判断类型
+                object data = fieldInfo.GetValue(m_curBaseNode);
+                bool isInt = 
+
+                #endregion
+                
+                
+                property.PropertyValue = fieldInfo.GetValue(m_curBaseNode)
+
+            }
+            
+        }
+
+        public void GetTypeValue(FieldInfo fieldInfo,ref ExposedProperty property)
+        {
+            switch (fieldInfo.FieldType)
+            {
+                case typeof(int):
+                    break;
+            }
+        }
+        
+        #endregion
+
         #region 属性
+
         /// <summary>
         /// 在属性栏中添加属性
         /// </summary>
@@ -163,11 +235,11 @@ namespace MyEditorView
             var container = new VisualElement();
             var blackboardField = new BlackboardField()
             {
-                text = property.PropertyName,
-                typeText = "string Property"
+                text = property.PropertyValue,
+                typeText = property.PropertyName
             };
             container.Add(blackboardField);
-            
+
             //折叠属性
             var propertyValueTextFeild = new TextField("Value")
             {
@@ -183,9 +255,10 @@ namespace MyEditorView
             });
             var blackBoardValueRow = new BlackboardRow(blackboardField, propertyValueTextFeild);
             container.Add(blackBoardValueRow);
-            
+
             Blackboard.Add(container);
         }
+
         #endregion
 
         #region 菜单
@@ -193,7 +266,7 @@ namespace MyEditorView
         private void AddSearchWindow(EditorWindow editorWindow)
         {
             m_searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
-            m_searchWindow.Init(editorWindow,this);
+            m_searchWindow.Init(editorWindow, this);
             //
             nodeCreationRequest = context =>
             {
@@ -202,6 +275,5 @@ namespace MyEditorView
         }
 
         #endregion
-
     }
 }

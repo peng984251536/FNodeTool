@@ -31,12 +31,13 @@ namespace MyEditorView
         public BaseNode BaseNode;
         
 
-        public EditorNodeBase(GraphView graphView, string GUID)
+        public EditorNodeBase(DialogueView graphView, string GUID)
         {
             m_graphView = graphView;
             this.GUID = (string.IsNullOrEmpty(GUID) || GUID == "") ? Guid.NewGuid().ToString() : GUID;
-            
+
             this.RegisterCallback<MouseDownEvent>((evt => onClickEvent?.Invoke(this)));
+            onClickEvent += graphView.OnSelectNode;
         }
 
         /// <summary>

@@ -11,14 +11,13 @@ namespace MyEditorView
     /// </summary>
     public class DefaultEditorNode:EditorNodeBase
     {
-        public BaseNode BaseNode = null;
         
         // private DialogueNode()
         // {
         //     
         // }
         
-        public DefaultEditorNode(GraphView graphView,BaseNode baseNode,string _guid=null): base(graphView,_guid)
+        public DefaultEditorNode(DialogueView graphView,BaseNode baseNode,string _guid=null): base(graphView,_guid)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();
