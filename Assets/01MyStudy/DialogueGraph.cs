@@ -12,7 +12,7 @@ using UnityGameFramework.Runtime;
 
 namespace MyEditorView
 {
-    public class FileName
+    public class FileState
     {
         public const string BaseTree = "BaseTree";
     }
@@ -26,6 +26,21 @@ namespace MyEditorView
         private DialogueContainer m_currentContainer;
         private DialogueView m_DialogueView;
         private string m_fileName = "New Narrative";
+
+        private TextField m_TextField = null;
+        public string FileName
+        {
+            get
+            {
+                m_fileName = PlayerPrefs.GetString(FileState.BaseTree, "File Name");
+                return m_fileName;
+            }
+            set
+            {
+                PlayerPrefs.SetString(FileState.BaseTree,value);
+                m_fileName = value;
+            }
+        }
 
         [MenuItem("My Graph/Dialogue Graph")]
         public static void OpenDialogueGraphWindow()
@@ -72,35 +87,24 @@ namespace MyEditorView
             nodeCreateButton.text = "Create Node";
             toolbar.Add(nodeCreateButton);
             //数据名字（保存/加载）
-            var fileNameTextField = new TextField("File Name");
-            PlayerPrefs.GetString(FileName.BaseTree,"File Name");
-            fileNameTextField.SetValueWithoutNotify(m_fileName);
-            fileNameTextField.MarkDirtyRepaint();
-            fileNameTextField.RegisterValueChangedCallback((evt =>
+            m_TextField = new TextField("File Name");
+            m_TextField.SetValueWithoutNotify(FileName);
+            m_TextField.MarkDirtyRepaint();
+            m_TextField.RegisterValueChangedCallback((evt =>
             {
-                m_fileName = evt.newValue;
-                PlayerPrefs.SetString(FileName.BaseTree,evt.newValue);
+                FileName = evt.newValue;
             }));
             //数据实体
             ObjectField treeField = new ObjectField();
             treeField.RegisterValueChangedCallback((e) =>
             {
-                DialogueContainer container = e.newValue as DialogueContainer;
-                if(m_GraphSaveUtility==null)
-                    m_GraphSaveUtility = GraphSaveUtility.GetInstance(m_DialogueView);
-                m_GraphSaveUtility.LoadGraph(container);
-
-                m_fileName = container.name;
-                fileNameTextField.SetValueWithoutNotify(m_fileName);
-                PlayerPrefs.SetString(FileName.BaseTree,m_fileName);
+                FileName = e.newValue.name;
+                RequestDataOperation(false);
             });
             treeField.objectType = typeof(DialogueContainer);
-            m_currentContainer = Resources.Load<DialogueContainer>(m_fileName);
-            if(m_currentContainer!=null)
-                treeField.SetValueWithoutNotify(m_currentContainer);
             
             
-            toolbar.Add(fileNameTextField);
+            toolbar.Add(m_TextField);
             toolbar.Add(treeField);
             toolbar.Add(new Button((() => RequestDataOperation(true))){text = "SaveData"});
             toolbar.Add(new Button((() => RequestDataOperation(false))){text = "LoadData"});
@@ -133,24 +137,29 @@ namespace MyEditorView
         
         private void RequestDataOperation(bool save)
         {
-            if (string.IsNullOrEmpty(m_fileName))
+            if (string.IsNullOrEmpty(FileName))
             {
                 //警告弹窗
                 EditorUtility.DisplayDialog("Invalid file name!", "Please enter a valid file name.", "ok");
                 return;
             }
 
-            if(m_GraphSaveUtility==null)
-                m_GraphSaveUtility = GraphSaveUtility.GetInstance(m_DialogueView);
+
+            m_GraphSaveUtility = GraphSaveUtility.GetInstance(m_DialogueView);
             if (save)
             {
-                m_GraphSaveUtility.SaveGraph(m_fileName);
+                m_GraphSaveUtility.SaveGraph(FileName);
             }
             else
             {
-                m_GraphSaveUtility.LoadGraph(m_fileName);
+                m_GraphSaveUtility.LoadGraph(FileName);
             }
 
+        }
+
+        private void UpdateFileName(string fileName)
+        {
+            
         }
 
 

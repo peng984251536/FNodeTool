@@ -20,6 +20,7 @@ namespace MyEditorView
         public UnityEngine.Vector2 m_defaultNodeSize = new UnityEngine.Vector2(100, 200);
         public Blackboard Blackboard;
         public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
+        private FieldInfo[] NodeFields = null;
 
         private NodeSearchWindow m_searchWindow;
         private EditorWindow m_EditorWindow;
@@ -149,8 +150,7 @@ namespace MyEditorView
         #endregion
 
         #region 点击节点
-
-        private FieldInfo[] m_nodeFields = null;
+        
         private BaseNode m_curBaseNode = null;
         
         /// <summary>
@@ -159,6 +159,8 @@ namespace MyEditorView
         /// <param name="nodeBase"></param>
         public virtual void OnSelectNode(EditorNodeBase nodeBase)
         {
+            if(nodeBase.BaseNode==null)
+                return;
             m_curBaseNode = nodeBase.BaseNode;
             InspectClassProperties(nodeBase.BaseNode);
         }
@@ -167,12 +169,12 @@ namespace MyEditorView
         {
             Type type = baseNode.GetType();
 
-            m_nodeFields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+            NodeFields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
             
             // PropertyInfo[] properties = (type)
             //     .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-            foreach (var property in m_nodeFields)
+            foreach (var property in NodeFields)
             {
                 UnityEngine.Debug.Log(
                     $"InspectClassProperties:type:{property.Name}--value:{property.FieldType}");
@@ -182,38 +184,49 @@ namespace MyEditorView
                     Debug.Log($"---->> CustomAttributes:{attributes[i]}");
                 }
             }
+
+            UpdateBlackboardProperty();
         }
 
         public virtual void UpdateBlackboardProperty()
         {
+            Blackboard.Clear();
+            ExposedProperties.Clear();
             DialogueGraph.InitBlackBoard(this,Blackboard);
 
-            for (int i = 0; i < m_nodeFields.Length; i++)
+            for (int i = 0; i < NodeFields.Length; i++)
             {
-                FieldInfo fieldInfo = m_nodeFields[i];
+                FieldInfo fieldInfo = NodeFields[i];
                 ExposedProperty property = new ExposedProperty();
-                property.PropertyName = fieldInfo.Name;
-
-                #region 判断类型
-                object data = fieldInfo.GetValue(m_curBaseNode);
-                bool isInt = 
-
-                #endregion
-                
-                
-                property.PropertyValue = fieldInfo.GetValue(m_curBaseNode)
-
+                GetTypeValue(fieldInfo,ref property);
+                AddPropertyToBlackBoard(property);
             }
             
         }
 
         public void GetTypeValue(FieldInfo fieldInfo,ref ExposedProperty property)
         {
-            switch (fieldInfo.FieldType)
+            if (fieldInfo.FieldType == typeof(int))
             {
-                case typeof(int):
-                    break;
+                int index = (int)(fieldInfo.GetValue(m_curBaseNode));
+                property.PropertyValue = index.ToString();
             }
+            else if (fieldInfo.FieldType == typeof(long))
+            {
+                long index = (long)(fieldInfo.GetValue(m_curBaseNode));
+                property.PropertyValue = index.ToString();
+            }
+            else if (fieldInfo.FieldType == typeof(string))
+            {
+                string index = (string)(fieldInfo.GetValue(m_curBaseNode));
+                property.PropertyValue = index;
+            }
+            else if (fieldInfo.FieldType == typeof(bool))
+            {
+                bool index = (bool)(fieldInfo.GetValue(m_curBaseNode));
+                property.PropertyValue = index.ToString();
+            }
+            property.PropertyName = fieldInfo.Name;
         }
         
         #endregion

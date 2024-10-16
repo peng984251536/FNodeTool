@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   NodeLinks:
-  - OutputNodeGuid: f7d453c6-500c-4201-8f9f-70e360c0cfc8
+  - OutputNodeGuid: 6e320c3a-54e7-4846-9d09-c889a017c265
     OutputNodeIndex: 0
-    InputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
+    InputNodeGuid: dd0f4acf-da94-427a-94db-6f7106fb9514
     InputNodeIndex: 0
-  - OutputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
+  - OutputNodeGuid: dd0f4acf-da94-427a-94db-6f7106fb9514
     OutputNodeIndex: 0
-    InputNodeGuid: 49771b5c-78c4-4ceb-bfd0-1987cebffb65
+    InputNodeGuid: 7ecd20e6-ea9b-431b-9c93-67c388155233
     InputNodeIndex: 0
-  - OutputNodeGuid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
+  - OutputNodeGuid: dd0f4acf-da94-427a-94db-6f7106fb9514
     OutputNodeIndex: 0
-    InputNodeGuid: 4fde5b98-9fd3-4756-9d47-40130918c05c
+    InputNodeGuid: 0ac9bb4f-dd46-49ad-9917-07ef07158a97
     InputNodeIndex: 0
   DialogueNodeDatas:
   - userData: {fileID: 0}
     NodeType: MyEditorView.EntryPointEditorNode
-    Guid: f7d453c6-500c-4201-8f9f-70e360c0cfc8
+    Guid: 6e320c3a-54e7-4846-9d09-c889a017c265
     DialogueText: ENTRYPOINT
     Position: {x: 100, y: 200}
     OutPortName:
@@ -36,27 +36,9 @@ MonoBehaviour:
     InPortName: []
   - userData: {fileID: 0}
     NodeType: MyEditorView.DefaultEditorNode
-    Guid: 0d9cf740-e7ea-4e4a-8611-13d716e64b2a
-    DialogueText: SequenceNode
-    Position: {x: 237, y: 200}
-    OutPortName:
-    - 
-    InPortName:
-    - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.DefaultEditorNode
-    Guid: 49771b5c-78c4-4ceb-bfd0-1987cebffb65
-    DialogueText: WaitNode
-    Position: {x: 436, y: 86}
-    OutPortName:
-    - 
-    InPortName:
-    - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.DefaultEditorNode
-    Guid: 4fde5b98-9fd3-4756-9d47-40130918c05c
-    DialogueText: WaitNode
-    Position: {x: 436, y: 260}
+    Guid: dd0f4acf-da94-427a-94db-6f7106fb9514
+    DialogueText: RandomSelectorNode
+    Position: {x: 244, y: 200}
     OutPortName:
     - 
     InPortName:

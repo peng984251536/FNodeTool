@@ -1,5 +1,15 @@
 [
   {
+    "UniqueKey": "TestNode",
+    "MenuItem": "Test/TestNode",
+    "Owners": [
+      0,
+      1
+    ],
+    "AssociationType": "TestBaseNode, FNode.Sample.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "TypeId": "FNode.Editor.GraphViewMenuItemAttribute, FNode.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+  },
+  {
     "UniqueKey": "Test",
     "MenuItem": "Test",
     "Owners": [
@@ -7,16 +17,6 @@
       2
     ],
     "AssociationType": "TestMenu, FNode.Sample.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "TypeId": "FNode.Editor.GraphViewMenuItemAttribute, FNode.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-  },
-  {
-    "UniqueKey": "TestNode",
-    "MenuItem": "Test/TestNode",
-    "Owners": [
-      0,
-      1
-    ],
-    "AssociationType": "TestNode, FNode.Sample.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "TypeId": "FNode.Editor.GraphViewMenuItemAttribute, FNode.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   },
   {

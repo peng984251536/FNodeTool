@@ -69,13 +69,19 @@ namespace MyEditorView
             foreach (var dialogueNode in Nodes)
             {
                 DefaultEditorNode defaultEditorNode = dialogueNode as DefaultEditorNode;
+                if(dialogueNode.outputContainer.childCount==0)
+                    continue;
+                //连接节点数据
                 if (defaultEditorNode != null)
                 {
+                    
                     Port outputPort = defaultEditorNode.outputContainer[0].Q<Port>();
                     for (int i = 0; i < Nodes.Count; i++)
                     {
                         DefaultEditorNode _node = Nodes[i] as DefaultEditorNode;
                         if(_node==null)
+                            continue;
+                        if(_node.inputContainer.childCount==0)
                             continue;
                         Port inputPort = _node.inputContainer[0].Q<Port>();
                         if(inputPort==outputPort)
