@@ -67,6 +67,8 @@ sysinfo.txt
 /Logs*
 /obj*
 /UserSettings*
+/ProjectSettings*
+/Packages*
 
 # Crashlytics generated file
 crashlytics-build.properties
