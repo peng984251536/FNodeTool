@@ -18,11 +18,8 @@ namespace MyEditorView.Runtime
 
         protected override void DoAction()
         {
-            Debug.Log(stringValue);
+            Debug.Log($"DebugLogNode:{stringValue}");
         }
 
-        public DebugLogNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
     }
 }

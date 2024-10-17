@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2627905926196646185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188cbd1a47034e5b9e482814da31d8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkDatas: []
+  nodeDatas: []
+  testValue: oooooooooooooo
+  children: []
+  ExposedInt: 0
+--- !u!114 &-891128147149183822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkDatas: []
+  nodeDatas: []
+  testValue: oooooooooooooo
+  stringValue: 
+  stringValue2: 
+  stringValue3: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,64 +48,59 @@ MonoBehaviour:
   m_Name: 100
   m_EditorClassIdentifier: 
   NodeLinks:
-  - OutputNodeGuid: fe6f1d01-65f4-4fb5-8a6e-4f94d0b4030d
+  - OutputNodeGuid: 49ed8316-e65c-4bd7-8bcc-e78396910b35
     OutputNodeIndex: 0
-    InputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+    InputNodeGuid: 0abe8c21-4965-4de6-a7ce-ac9d6862a6da
     InputNodeIndex: 0
-  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
+  - OutputNodeGuid: 0abe8c21-4965-4de6-a7ce-ac9d6862a6da
     OutputNodeIndex: 0
-    InputNodeGuid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
-    InputNodeIndex: 0
-  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
-    OutputNodeIndex: 0
-    InputNodeGuid: 8ab41c30-e00d-4a56-8a14-ca0d99a30db9
-    InputNodeIndex: 0
-  - OutputNodeGuid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
-    OutputNodeIndex: 0
-    InputNodeGuid: 6f27bdf8-3fc9-4cc8-a912-309c2622521d
+    InputNodeGuid: 702697c0-8f7b-4a2a-88ca-fe5c26635d39
     InputNodeIndex: 0
   DialogueNodeDatas:
-  - userData: {fileID: 0}
+  - userData: {fileID: -2627905926196646185}
     NodeType: MyEditorView.EntryPointEditorNode
-    Guid: fe6f1d01-65f4-4fb5-8a6e-4f94d0b4030d
+    Guid: 49ed8316-e65c-4bd7-8bcc-e78396910b35
     DialogueText: ENTRYPOINT
-    Position: {x: 100, y: 200}
+    Position: {x: 155, y: 208}
     OutPortName:
     - 
     InPortName: []
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.EditorNodeBase
-    Guid: 7d1ae85a-317f-468b-a274-7fdc8cbf8dbf
-    DialogueText: RandomSelectorNode
-    Position: {x: 237, y: 200}
+  - userData: {fileID: 2265988015330744926}
+    NodeType: MyEditorView.DefaultEditorNode
+    Guid: 0abe8c21-4965-4de6-a7ce-ac9d6862a6da
+    DialogueText: SequenceNode
+    Position: {x: 286, y: 226}
     OutPortName:
     - 
     InPortName:
     - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.EditorNodeBase
-    Guid: 8ab41c30-e00d-4a56-8a14-ca0d99a30db9
+  - userData: {fileID: -891128147149183822}
+    NodeType: MyEditorView.DefaultEditorNode
+    Guid: 702697c0-8f7b-4a2a-88ca-fe5c26635d39
     DialogueText: DebugLogNode
-    Position: {x: 454, y: 186}
-    OutPortName:
-    - 
+    Position: {x: 513, y: 162}
+    OutPortName: []
     InPortName:
     - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.EditorNodeBase
-    Guid: 6f27bdf8-3fc9-4cc8-a912-309c2622521d
-    DialogueText: DebugLogNode
-    Position: {x: 454, y: 344}
-    OutPortName:
-    - 
-    InPortName:
-    - 
-  - userData: {fileID: 0}
-    NodeType: MyEditorView.EditorNodeBase
-    Guid: 0c5fa0ae-4b2b-4fa1-9d64-049f9ff74aff
-    DialogueText: DebugLogNode
-    Position: {x: 454, y: 48}
-    OutPortName:
-    - 
-    InPortName:
-    - 
+  BaseNodes:
+  - {fileID: -2627905926196646185}
+  - {fileID: 2265988015330744926}
+  - {fileID: -891128147149183822}
+--- !u!114 &2265988015330744926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188cbd1a47034e5b9e482814da31d8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkDatas: []
+  nodeDatas: []
+  testValue: oooooooooooooo
+  children:
+  - {fileID: -2627905926196646185}
+  ExposedInt: 0

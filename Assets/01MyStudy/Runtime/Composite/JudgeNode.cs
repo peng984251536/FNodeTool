@@ -17,11 +17,6 @@ namespace MyEditorView.Runtime
         {
             //Judge();
         }
-    
-        //protected virtual void Judge();
-
-        public JudgeNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }

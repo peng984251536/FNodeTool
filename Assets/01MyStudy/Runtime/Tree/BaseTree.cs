@@ -14,7 +14,7 @@ namespace MyEditorView.Runtime
 
         public BaseNode rootNode;
         public BaseNode.State treeState;
-        public Dictionary<string, BaseNode> Nodes = new Dictionary<string, BaseNode>(); //这棵树的所有节点
+        public List<BaseNode> Nodes = new List<BaseNode>(); //这棵树的所有节点
 
         bool running;
         public Action onUpdateEvent;
@@ -27,8 +27,10 @@ namespace MyEditorView.Runtime
         {
             running = false;
             treeState = BaseNode.State.Default;
-            foreach (var baseNode in Nodes.Values)
+            foreach (var baseNode in Nodes)
             {
+                baseNode.Enable = true;
+                baseNode.Init(this);
                 baseNode.ResetState();
             }
             onUpdateEvent?.Invoke();
@@ -58,8 +60,8 @@ namespace MyEditorView.Runtime
                 }
             }
 
-            if (treeState == BaseNode.State.Success || treeState == BaseNode.State.Failure)
-                OnStopped();
+            // if (treeState == BaseNode.State.Success || treeState == BaseNode.State.Failure)
+            //     OnStopped();
             return treeState;
         }
 
@@ -77,6 +79,12 @@ namespace MyEditorView.Runtime
         }
         
         #region 读取数据
+
+        public void InitTree(BaseNode rootNode,List<BaseNode> nodeDatas)
+        {
+            this.rootNode = rootNode;
+            this.Nodes = nodeDatas;
+        }
         
         private DialogueContainer m_currentContainer;
         

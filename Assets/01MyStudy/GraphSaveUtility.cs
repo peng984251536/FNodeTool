@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using FNode.Editor;
 using MyEditorView.Runtime;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Edge = UnityEditor.Experimental.GraphView.Edge;
 using NodeData = MyEditorView.Runtime.NodeData;
 
 namespace MyEditorView
@@ -36,10 +38,17 @@ namespace MyEditorView
         public void SaveGraph(string fileName)
         {
             if (!Edges.Any()) return;
-
-            var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+            string path = $"Assets/Resources/{fileName}.asset";
+            
+            DialogueContainer dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+            Dictionary<string,BaseNode> copyBaseNodes = new Dictionary<string,BaseNode>();
+            foreach (var dialogueNode in Nodes)
+            {
+                BaseNode baseNode = ScriptableObject.Instantiate<BaseNode>(dialogueNode.LocalBaseNode);
+                baseNode.RemoveAllChild();
+                copyBaseNodes.Add(dialogueNode.GUID,baseNode);
+            }
             //保存 节点的连线信息
-            //var connectedPorts = Edges.Where((edge => edge.input.node != null)).ToArray();//拿到连线信息
             var connectedPorts = Edges.Where((edge => true)).ToArray(); //拿到连线信息
             for (int i = 0; i < connectedPorts.Length; i++)
             {
@@ -50,77 +59,75 @@ namespace MyEditorView
                 //接口
                 var outputCount = outputNode.outputContainer.FindPort(curEdge.output);
                 var intputCount = inputNode.inputContainer.FindPort(curEdge.input);
-                
+
                 //保存连线数据
                 dialogueContainer.NodeLinks.Add(new NodeLinkData()
                 {
                     //OutPortName = curEdge.output.portName,
                     //InPortName = curEdge.input.portName,
-                    
+
                     OutputNodeGuid = outputNode.GUID,
                     OutputNodeIndex = outputCount,
                     InputNodeGuid = inputNode.GUID,
                     InputNodeIndex = intputCount,
                 });
+                //连接节点数据
+                if (!copyBaseNodes.ContainsKey(outputNode.GUID))
+                    continue;
+                if (!copyBaseNodes.ContainsKey(inputNode.GUID))
+                    continue;
+                copyBaseNodes[outputNode.GUID].AddChild(copyBaseNodes[inputNode.GUID]);
+                //outputNode.LocalBaseNode.AddChild(inputNode.LocalBaseNode);
             }
 
             //保存 节点数据
-            //foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
             foreach (var dialogueNode in Nodes)
             {
-                DefaultEditorNode defaultEditorNode = dialogueNode as DefaultEditorNode;
-                if(dialogueNode.outputContainer.childCount==0)
-                    continue;
-                //连接节点数据
-                if (defaultEditorNode != null)
-                {
-                    
-                    Port outputPort = defaultEditorNode.outputContainer[0].Q<Port>();
-                    for (int i = 0; i < Nodes.Count; i++)
-                    {
-                        DefaultEditorNode _node = Nodes[i] as DefaultEditorNode;
-                        if(_node==null)
-                            continue;
-                        if(_node.inputContainer.childCount==0)
-                            continue;
-                        Port inputPort = _node.inputContainer[0].Q<Port>();
-                        if(inputPort==outputPort)
-                            defaultEditorNode.BaseNode.AddChild(Nodes[i].BaseNode);
-                    }
-                }
-                
+
                 string[] _OutPortName = new string[dialogueNode.outputContainer.childCount];
                 for (int i = 0; i < _OutPortName.Length; i++)
                 {
                     _OutPortName[i] = dialogueNode.outputContainer[i].name;
                 }
+
                 string[] _InPortName = new string[dialogueNode.inputContainer.childCount];
                 for (int i = 0; i < _InPortName.Length; i++)
                 {
                     _InPortName[i] = dialogueNode.inputContainer[i].name;
                 }
-                
+
                 dialogueContainer.DialogueNodeDatas.Add(new NodeData()
                 {
-                    userData = defaultEditorNode?.BaseNode,
+                    userData = copyBaseNodes[dialogueNode.GUID],
                     Guid = dialogueNode.GUID,
                     DialogueText = dialogueNode.DialogueText,
                     Position = dialogueNode.GetPosition().position,
-                    
+
                     NodeType = dialogueNode.GetType().ToString(),
                     OutPortName = _OutPortName,
                     InPortName = _InPortName,
-                    
                 });
+                dialogueContainer.BaseNodes.Add(copyBaseNodes[dialogueNode.GUID]);
             }
-
+            
+            
             if (!AssetDatabase.IsValidFolder("Assets/Resources"))
                 AssetDatabase.CreateFolder("Assets", "Resources");
-
-            AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
+            
+            foreach (var baseNode in copyBaseNodes.Values)
+            {
+                AssetDatabase.AddObjectToAsset(baseNode, path);
+                Debug.Log($"添加物体uid:{baseNode.uid}");
+            }
+            
+            AssetDatabase.CreateAsset(dialogueContainer, path);
+            AssetDatabase.ImportAsset(path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            
+            EditorUtility.SetDirty(dialogueContainer);
         }
+
         /// <summary>
         /// 是否成功保存
         /// </summary>
@@ -136,12 +143,12 @@ namespace MyEditorView
         /// </summary>
         private void SaveExposedProperties(DialogueContainer container)
         {
-            
         }
-        
+
         #endregion
 
         #region 读取数据
+
         public void LoadGraph(string fileName)
         {
             m_currentContainer = Resources.Load<DialogueContainer>(fileName);
@@ -155,18 +162,19 @@ namespace MyEditorView
             CreateNodes();
             ConnectNodes();
         }
+
         public void LoadGraph(DialogueContainer container)
         {
-            if(container==null)
+            if (container == null)
                 return;
-            
+
             m_currentContainer = container;
-            
+
             ClearGraph();
             CreateNodes();
             ConnectNodes();
         }
-        
+
         /// <summary>
         /// 为节点进行连接
         /// </summary>
@@ -176,8 +184,8 @@ namespace MyEditorView
             {
                 //找到 NodeLink-输出节点
                 var connections = m_currentContainer.NodeLinks.Where
-                (nodeLinkData => nodeLinkData.OutputNodeGuid == Nodes[i].GUID).ToList();
-                
+                    (nodeLinkData => nodeLinkData.OutputNodeGuid == Nodes[i].GUID).ToList();
+
                 for (int j = 0; j < connections.Count; j++)
                 {
                     //NodeLink的输入节点
@@ -186,12 +194,12 @@ namespace MyEditorView
                     var targetNode = Nodes.First(node => node.GUID == targetNodeGuid);
                     int intputIndex = connections[j].InputNodeIndex;
                     int outputIndex = connections[j].OutputNodeIndex;
-                    LinkNodes(Nodes[i].outputContainer[outputIndex].Q<Port>(), (Port)targetNode.inputContainer[intputIndex]);
-                    
+                    LinkNodes(Nodes[i].outputContainer[outputIndex].Q<Port>(),
+                        (Port)targetNode.inputContainer[intputIndex]);
                 }
             }
         }
-        
+
         /// <summary>
         /// 对两节点进行连线
         /// </summary>
@@ -206,10 +214,10 @@ namespace MyEditorView
             };
             tempEdge?.input.Connect(tempEdge);
             tempEdge?.output.Connect(tempEdge);
-            
+
             m_targetGraphView.Add(tempEdge);
         }
-        
+
         /// <summary>
         /// 在 view 加载保存的节点
         /// </summary>
@@ -220,18 +228,18 @@ namespace MyEditorView
             {
                 //创建一个节点
                 EditorNodeBase editorNodeBase;
-                
-                if (nodeData.InPortName.Length == 0||nodeData.NodeType.Contains(nameof(EntryPointEditorNode)))
+
+                if (nodeData.InPortName.Length == 0 || nodeData.NodeType.Contains(nameof(EntryPointEditorNode)))
                 {
                     editorNodeBase = m_targetGraphView.GenerateEntryPointNode(nodeData.Guid);
                     editorNodeBase.SetPosition(new Rect(
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
-                    editorNodeBase.BaseNode = nodeData.userData;
+                    editorNodeBase.LocalBaseNode = nodeData.userData;
                     editorNodeBase.EntryPoint = true;
                 }
-                else//(nodeData.NodeType.Contains(nameof(DialogueNode)))
+                else //(nodeData.NodeType.Contains(nameof(DialogueNode)))
                 {
                     editorNodeBase = new EditorNodeBase(m_targetGraphView, nodeData.Guid);
                     editorNodeBase.title = nodeData.DialogueText;
@@ -240,19 +248,21 @@ namespace MyEditorView
                         nodeData.Position,
                         m_targetGraphView.DefaultNodeSize
                     ));
-                    editorNodeBase.BaseNode = nodeData.userData;
+                    editorNodeBase.LocalBaseNode = nodeData.userData;
                     m_targetGraphView.AddElement(editorNodeBase);
-                    
+
                     for (int i = 0; i < nodeData.InPortName.Length; i++)
                     {
                         EditorNodeBase.GeneratePort(editorNodeBase, Direction.Input, nodeData.InPortName[i]);
                     }
+
                     for (int i = 0; i < nodeData.OutPortName.Length; i++)
                     {
-                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Output, nodeData.OutPortName[i],Port.Capacity.Multi);
+                        EditorNodeBase.GeneratePort(editorNodeBase, Direction.Output, nodeData.OutPortName[i],
+                            Port.Capacity.Multi);
                     }
                 }
-                
+
                 m_targetGraphView.AddElement(editorNodeBase);
 
                 // //初始化节点的输出接口
@@ -263,7 +273,8 @@ namespace MyEditorView
         }
 
         #region 创建对应的节点类型
-        private EntryPointEditorNode CreateEntryNode(string dialogueName,string guid,Vector3 position)
+
+        private EntryPointEditorNode CreateEntryNode(string dialogueName, string guid, Vector3 position)
         {
             EntryPointEditorNode editorNodeBase;
             editorNodeBase = m_targetGraphView.GenerateEntryPointNode(guid);
@@ -274,30 +285,14 @@ namespace MyEditorView
             editorNodeBase.EntryPoint = true;
             return editorNodeBase;
         }
-        
 
         #endregion
-        
+
         /// <summary>
         /// 清楚当前的所有节点
         /// </summary>
         private void ClearGraph()
         {
-            //Nodes.Find((node =>node.EntryPoint)).GUID = m_currentContainer.NodeLinks[0].BaseNodeGuid;
-
-
-            // foreach (var node in Nodes)
-            // {
-            //     //if(node.EntryPoint) return;
-            //     Func<Edge, bool> getEdgeFunc = edge => edge.input.node == node;
-            //     Action<Edge> removeEdgeAction = edge =>
-            //     {
-            //         m_targetGraphView.RemoveElement(edge);
-            //     };
-            //     
-            //     //移除连线
-            //     Edges.Where(getEdgeFunc).ToList().ForEach(removeEdgeAction);
-            // }
             foreach (var node in Nodes)
             {
                 //if(node.EntryPoint) return;
@@ -311,6 +306,7 @@ namespace MyEditorView
             Action<EditorNodeBase> removeNodeAction = Node => { m_targetGraphView.RemoveElement(Node); };
             Nodes.ForEach(removeNodeAction);
         }
+
         #endregion
     }
 }

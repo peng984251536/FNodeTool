@@ -84,7 +84,7 @@ namespace MyEditorView
             //获取编辑器的局部位置
             var localMousePosition = m_DialogueView.contentViewContainer.WorldToLocal(worldMousePos);
 
-            Debug.Log($"OnSelectEntry::{nameof(SearchTreeEntry.userData)}");
+            //Debug.Log($"OnSelectEntry::{nameof(SearchTreeEntry.userData)}");
             Type type = SearchTreeEntry.userData as Type;
             BaseNode node = CreateInstance(type) as BaseNode;
             if (node == null)

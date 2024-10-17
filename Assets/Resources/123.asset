@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1233f870b24d7788a6f55e20a4e0f8, type: 3}
+  m_Name: 123
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - OutputNodeGuid: bacec147-e62d-4a3f-b782-a00261f2ab3a
+    OutputNodeIndex: 0
+    InputNodeGuid: abe233dc-1c68-4b92-9f56-c51ee0d6ec36
+    InputNodeIndex: 0
+  - OutputNodeGuid: bacec147-e62d-4a3f-b782-a00261f2ab3a
+    OutputNodeIndex: 0
+    InputNodeGuid: 08c4feab-7e72-4f72-b721-568323a54dbc
+    InputNodeIndex: 0
+  - OutputNodeGuid: bacec147-e62d-4a3f-b782-a00261f2ab3a
+    OutputNodeIndex: 0
+    InputNodeGuid: 277d262e-821e-4144-9580-603b22457841
+    InputNodeIndex: 0
+  - OutputNodeGuid: 86af8fa0-0c8b-4932-9082-93a1db2d3ba6
+    OutputNodeIndex: 0
+    InputNodeGuid: 42ec58d8-16e5-4cd4-ba91-f41b086a043e
+    InputNodeIndex: 0
+  - OutputNodeGuid: 42ec58d8-16e5-4cd4-ba91-f41b086a043e
+    OutputNodeIndex: 0
+    InputNodeGuid: bacec147-e62d-4a3f-b782-a00261f2ab3a
+    InputNodeIndex: 0
+  DialogueNodeDatas:
+  - userData: {fileID: 9115048454608010541, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EntryPointEditorNode
+    Guid: 86af8fa0-0c8b-4932-9082-93a1db2d3ba6
+    DialogueText: ENTRYPOINT
+    Position: {x: 53, y: 200}
+    OutPortName:
+    - 
+    InPortName: []
+  - userData: {fileID: -5750424464439470592, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 42ec58d8-16e5-4cd4-ba91-f41b086a043e
+    DialogueText: SequenceNode
+    Position: {x: 207, y: 200}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - userData: {fileID: -1258302168744438784, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: abe233dc-1c68-4b92-9f56-c51ee0d6ec36
+    DialogueText: DebugLogNode
+    Position: {x: 689, y: -13}
+    OutPortName: []
+    InPortName:
+    - 
+  - userData: {fileID: 8770219977817399508, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 08c4feab-7e72-4f72-b721-568323a54dbc
+    DialogueText: DebugLogNode
+    Position: {x: 689, y: 200}
+    OutPortName: []
+    InPortName:
+    - 
+  - userData: {fileID: -8019766933520578163, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: 277d262e-821e-4144-9580-603b22457841
+    DialogueText: DebugLogNode
+    Position: {x: 689, y: 352}
+    OutPortName: []
+    InPortName:
+    - 
+  - userData: {fileID: 7287516421483492767, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+    NodeType: MyEditorView.EditorNodeBase
+    Guid: bacec147-e62d-4a3f-b782-a00261f2ab3a
+    DialogueText: Repeat
+    Position: {x: 423, y: 200}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  BaseNodes:
+  - {fileID: 9115048454608010541, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+  - {fileID: -5750424464439470592, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+  - {fileID: -1258302168744438784, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+  - {fileID: 8770219977817399508, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+  - {fileID: -8019766933520578163, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}
+  - {fileID: 7287516421483492767, guid: 0bb377d3cb981e14caf2e410a87cb997, type: 2}

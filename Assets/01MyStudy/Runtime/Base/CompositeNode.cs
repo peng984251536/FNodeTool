@@ -15,8 +15,8 @@ namespace MyEditorView.Runtime
     [NodePath("Base/Composite/CompositeNode")]
     public abstract class CompositeNode:BaseNode,ICompositeNode
     {
-        [SerializeField, HideInInspector]
-        protected List<BaseNode> children = new List<BaseNode>();
+        [SerializeField]
+        public List<BaseNode> children = new List<BaseNode>();
         
         protected override void OnStart()
         {
@@ -26,6 +26,10 @@ namespace MyEditorView.Runtime
         {
             if (!children.Contains(baseNode))
                 children.Add(baseNode);
+        }
+        public override void RemoveAllChild()
+        {
+            children.Clear();
         }
 
         public override void RemoveChild(BaseNode baseNode)
@@ -38,9 +42,6 @@ namespace MyEditorView.Runtime
         {
             return children;
         }
-
-        protected CompositeNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }

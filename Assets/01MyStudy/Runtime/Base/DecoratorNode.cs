@@ -29,7 +29,7 @@ namespace MyEditorView.Runtime
             DoAction();
         }
 
-        protected sealed override void OnStop()
+        protected override void OnStop()
         {
         }
 
@@ -53,6 +53,10 @@ namespace MyEditorView.Runtime
         {
             child = null;
         }
+        public override void RemoveAllChild()
+        {
+            child = null;
+        }
 
         public override List<BaseNode> GetChildren()
         {
@@ -61,9 +65,6 @@ namespace MyEditorView.Runtime
             else
                 return new List<BaseNode>();
         }
-
-        protected DecoratorNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }

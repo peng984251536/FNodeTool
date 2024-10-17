@@ -24,9 +24,6 @@ namespace MyEditorView.Runtime
             else
                 return State.Failure;
         }
-
-        public RandomNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }

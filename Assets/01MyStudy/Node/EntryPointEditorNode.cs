@@ -1,5 +1,7 @@
 ﻿using System;
+using MyEditorView.Runtime;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace MyEditorView
 {
@@ -16,6 +18,7 @@ namespace MyEditorView
                 _guid = Guid.NewGuid().ToString();
             this.GUID = _guid;
             var generatePort = EditorNodeBase.GeneratePort(this, Direction.Output, "Next",Port.Capacity.Multi);
+            LocalBaseNode = ScriptableObject.CreateInstance<SequenceNode>();
             //generatePort.portName = "Next";
             //node.outputContainer.Add(generatePort);
             //var generatePort2 = GeneratePort(node, Direction.Input, "Input");

@@ -28,7 +28,7 @@ namespace MyEditorView
         public string DialogueText;
         public bool EntryPoint;
         public List<EditorNodeBase> childNodes = new List<EditorNodeBase>();
-        public BaseNode BaseNode;
+        public BaseNode LocalBaseNode;
         
 
         public EditorNodeBase(DialogueView graphView, string GUID)

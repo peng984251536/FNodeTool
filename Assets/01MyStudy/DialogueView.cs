@@ -159,10 +159,10 @@ namespace MyEditorView
         /// <param name="nodeBase"></param>
         public virtual void OnSelectNode(EditorNodeBase nodeBase)
         {
-            if(nodeBase.BaseNode==null)
+            if(nodeBase.LocalBaseNode==null)
                 return;
-            m_curBaseNode = nodeBase.BaseNode;
-            InspectClassProperties(nodeBase.BaseNode);
+            m_curBaseNode = nodeBase.LocalBaseNode;
+            InspectClassProperties(nodeBase.LocalBaseNode);
         }
 
         public virtual void InspectClassProperties(BaseNode baseNode)
@@ -176,12 +176,12 @@ namespace MyEditorView
 
             foreach (var property in NodeFields)
             {
-                UnityEngine.Debug.Log(
-                    $"InspectClassProperties:type:{property.Name}--value:{property.FieldType}");
+                // UnityEngine.Debug.Log(
+                //     $"InspectClassProperties:type:{property.Name}--value:{property.FieldType}");
                 var attributes = property.GetCustomAttributes(true);
                 for (int i = 0; i < attributes.Length; i++)
                 {
-                    Debug.Log($"---->> CustomAttributes:{attributes[i]}");
+                    //Debug.Log($"---->> CustomAttributes:{attributes[i]}");
                 }
             }
 
@@ -199,6 +199,7 @@ namespace MyEditorView
                 FieldInfo fieldInfo = NodeFields[i];
                 ExposedProperty property = new ExposedProperty();
                 GetTypeValue(fieldInfo,ref property);
+                ExposedProperties.Add(property);
                 AddPropertyToBlackBoard(property);
             }
             
@@ -242,7 +243,6 @@ namespace MyEditorView
             var property = new ExposedProperty();
             property.PropertyName = exposedProperty.PropertyName;
             property.PropertyValue = exposedProperty.PropertyValue;
-            ExposedProperties.Add(property);
 
             //显示
             var container = new VisualElement();
@@ -258,13 +258,14 @@ namespace MyEditorView
             {
                 value = property.PropertyValue
             };
+            propertyValueTextFeild.MarkDirtyRepaint();
             propertyValueTextFeild.RegisterValueChangedCallback((evt) =>
             {
                 var changingPropertyIndex = ExposedProperties.FindIndex
                 (
                     x => x.PropertyName == property.PropertyName
                 );
-                ExposedProperties[changingPropertyIndex].PropertyValue = evt.newValue;
+                OnUpdateProperty<object>(changingPropertyIndex, evt.newValue);
             });
             var blackBoardValueRow = new BlackboardRow(blackboardField, propertyValueTextFeild);
             container.Add(blackBoardValueRow);
@@ -272,6 +273,14 @@ namespace MyEditorView
             Blackboard.Add(container);
         }
 
+        private void OnUpdateProperty<T>(int changingPropertyIndex,T newValue)
+        {
+            if(m_curBaseNode==null)
+                return;
+            ExposedProperties[changingPropertyIndex].PropertyValue = newValue.ToString();
+            NodeFields[changingPropertyIndex].SetValue(m_curBaseNode,newValue);
+            
+        }
         #endregion
 
         #region 菜单

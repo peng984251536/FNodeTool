@@ -17,16 +17,16 @@ namespace MyEditorView
         //     
         // }
         
-        public DefaultEditorNode(DialogueView graphView,BaseNode baseNode,string _guid=null): base(graphView,_guid)
+        public DefaultEditorNode(DialogueView graphView,BaseNode localBaseNode,string _guid=null): base(graphView,_guid)
         {
             if(_guid==null)
                 _guid = Guid.NewGuid().ToString();
             this.GUID = _guid;
-            this.BaseNode = baseNode;
+            this.LocalBaseNode = localBaseNode;
             m_graphView = graphView;
             //输入输出
             var inputPort1 = EditorNodeBase.GeneratePort(this, Direction.Input, string.Empty);
-            ActionNode actionNode = baseNode as ActionNode;
+            ActionNode actionNode = localBaseNode as ActionNode;
             if (actionNode == null)
             {
                 var outputPort1 = EditorNodeBase.GeneratePort(this, Direction.Output, string.Empty,Port.Capacity.Multi);

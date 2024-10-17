@@ -16,18 +16,19 @@ namespace MyEditorView
     {
         public const string BaseTree = "BaseTree";
     }
-    
+
     /// <summary>
     /// 用于初始化编辑器窗口
     /// </summary>
-    public class DialogueGraph:EditorWindow
+    public class DialogueGraph : EditorWindow
     {
         private GraphSaveUtility m_GraphSaveUtility;
         private DialogueContainer m_currentContainer;
         private DialogueView m_DialogueView;
-        private string m_fileName = "New Narrative";
+        private string m_fileName = "";
 
         private TextField m_TextField = null;
+
         public string FileName
         {
             get
@@ -37,8 +38,18 @@ namespace MyEditorView
             }
             set
             {
-                PlayerPrefs.SetString(FileState.BaseTree,value);
-                m_fileName = value;
+                if (m_fileName != value)
+                {
+                    PlayerPrefs.SetString(FileState.BaseTree, value);
+                    m_fileName = value;
+                    m_TextField.SetValueWithoutNotify(value);
+                    
+                    var container = Resources.Load<DialogueContainer>(value);
+                    if (container != null)
+                    {
+                        RequestDataOperation(false);
+                    }
+                }
             }
         }
 
@@ -80,35 +91,25 @@ namespace MyEditorView
         {
             var toolbar = new Toolbar();
             //创建节点按钮
-            var nodeCreateButton = new Button(() => 
-            { 
-                m_DialogueView.CreateDialogueNode("Dialogue Node"); 
-            });
+            var nodeCreateButton = new Button(() => { m_DialogueView.CreateDialogueNode("Dialogue Node"); });
             nodeCreateButton.text = "Create Node";
             toolbar.Add(nodeCreateButton);
             //数据名字（保存/加载）
             m_TextField = new TextField("File Name");
             m_TextField.SetValueWithoutNotify(FileName);
             m_TextField.MarkDirtyRepaint();
-            m_TextField.RegisterValueChangedCallback((evt =>
-            {
-                FileName = evt.newValue;
-            }));
+            m_TextField.RegisterValueChangedCallback((evt => { FileName = evt.newValue; }));
             //数据实体
             ObjectField treeField = new ObjectField();
-            treeField.RegisterValueChangedCallback((e) =>
-            {
-                FileName = e.newValue.name;
-                RequestDataOperation(false);
-            });
+            treeField.RegisterValueChangedCallback((e) => { FileName = e.newValue.name; });
             treeField.objectType = typeof(DialogueContainer);
-            
-            
+
+
             toolbar.Add(m_TextField);
             toolbar.Add(treeField);
-            toolbar.Add(new Button((() => RequestDataOperation(true))){text = "SaveData"});
-            toolbar.Add(new Button((() => RequestDataOperation(false))){text = "LoadData"});
-            
+            toolbar.Add(new Button((() => RequestDataOperation(true))) { text = "SaveData" });
+            toolbar.Add(new Button((() => RequestDataOperation(false))) { text = "LoadData" });
+
             rootVisualElement.Add(toolbar);
         }
 
@@ -117,24 +118,24 @@ namespace MyEditorView
         /// </summary>
         private void GenerateMiniMap()
         {
-            var miniMap = new MiniMap{anchored = true};
+            var miniMap = new MiniMap { anchored = true };
             //
             var cords = m_DialogueView.contentViewContainer.WorldToLocal(new Vector2(maxSize.x - 10, 30));
-            miniMap.SetPosition(new Rect(cords.x,cords.y,200,140));
+            miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
             m_DialogueView.Add(miniMap);
         }
-        
+
         /// <summary>
         /// 添加定格背景版
         /// </summary>
         private void GenerateBlackBoard()
         {
             var blackboard = new Blackboard(m_DialogueView);
-            InitBlackBoard(m_DialogueView,blackboard);
+            InitBlackBoard(m_DialogueView, blackboard);
             m_DialogueView.Blackboard = blackboard;
             m_DialogueView.Add(blackboard);
         }
-        
+
         private void RequestDataOperation(bool save)
         {
             if (string.IsNullOrEmpty(FileName))
@@ -154,12 +155,10 @@ namespace MyEditorView
             {
                 m_GraphSaveUtility.LoadGraph(FileName);
             }
-
         }
 
         private void UpdateFileName(string fileName)
         {
-            
         }
 
 
@@ -167,7 +166,7 @@ namespace MyEditorView
 
         public virtual void OnSelectNode(EditorNodeBase nodeBase)
         {
-            InspectClassProperties(nodeBase.BaseNode);
+            InspectClassProperties(nodeBase.LocalBaseNode);
         }
 
         public virtual void InspectClassProperties(BaseNode baseNode)
@@ -179,21 +178,17 @@ namespace MyEditorView
                 var v = property.Attributes;
                 Log.Debug($"InspectClassProperties:type:{property.PropertyType}--value:{property.GetType()}");
             }
-            
         }
 
         #endregion
 
         #region 静态工具
 
-        public static void InitBlackBoard(DialogueView graphView,Blackboard blackboard)
+        public static void InitBlackBoard(DialogueView graphView, Blackboard blackboard)
         {
-            blackboard.Add(new BlackboardSection(){title = "Exposed Properties"});
+            blackboard.Add(new BlackboardSection() { title = "Exposed Properties" });
             //给这个属性板-添加属性
-            blackboard.addItemRequested = blackboard =>
-            {
-                graphView.AddPropertyToBlackBoard(new ExposedProperty());
-            };
+            blackboard.addItemRequested = blackboard => { graphView.AddPropertyToBlackBoard(new ExposedProperty()); };
             //编辑这个text的属性
             blackboard.editTextRequested = (blackboard1, element, newValue) =>
             {
@@ -211,7 +206,7 @@ namespace MyEditorView
                 graphView.ExposedProperties[propertyIndex].PropertyName = newValue;
                 ((BlackboardField)element).text = newValue;
             };
-            blackboard.SetPosition(new Rect(10,30,200,300));
+            blackboard.SetPosition(new Rect(10, 30, 200, 300));
         }
 
         #endregion

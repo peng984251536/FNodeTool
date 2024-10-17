@@ -24,9 +24,6 @@ namespace MyEditorView.Runtime
             else
                 return State.Running;
         }
-
-        public WaitNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }

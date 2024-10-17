@@ -32,9 +32,6 @@ namespace MyEditorView.Runtime
             }
             return State.Success;
         }
-
-        public RandomSelectorNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }
