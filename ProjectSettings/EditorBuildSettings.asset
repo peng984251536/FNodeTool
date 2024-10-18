@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Resources/Model/NPC01/Jammo-Character/Scenes/JammoScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/GF_DemoScene.unity
+    guid: 30c9e3d8d16a7fb498cbc6177933f567
   m_configObjects: {}
