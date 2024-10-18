@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Model/NPC01/Jammo-Character/Animations/AnimatorController_Jamo.controller.meta
 guid: 535d24752e3d6444da644e79e90ec2ca
+========
+guid: 0bb377d3cb981e14caf2e410a87cb997
+>>>>>>>> f998d1ffb6f748eb6df046325278613fa324ae19:Assets/Resources/123.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

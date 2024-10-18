@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Resources/100.asset.meta
-guid: e25a32da4e5706241a6c95bf78a41790
+<<<<<<<< HEAD:Assets/Resources/123.asset.meta
+guid: 0bb377d3cb981e14caf2e410a87cb997
 ========
-guid: beb8e357b61332141b55e69963cf4f96
->>>>>>>> GF-Study:Assets/Resources/Model/NPC01/Jammo-Character/Scenes/JammoScene_Profiles/GameObject Profile.asset.meta
+guid: e25a32da4e5706241a6c95bf78a41790
+>>>>>>>> f998d1ffb6f748eb6df046325278613fa324ae19:Assets/Resources/100.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
