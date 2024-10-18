@@ -25,14 +25,14 @@ namespace UnityGameFramework.Runtime
                 m_BaseComponent = GameEntry.GetComponent<BaseComponent>();
                 if (m_BaseComponent == null)
                 {
-                    Log.Fatal("Base component is invalid.");
+                    GFLog.Fatal("Base component is invalid.");
                     return;
                 }
 
                 m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
                 if (m_ResourceComponent == null)
                 {
-                    Log.Fatal("Resource component is invalid.");
+                    GFLog.Fatal("Resource component is invalid.");
                     return;
                 }
             }

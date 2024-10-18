@@ -89,7 +89,7 @@ namespace UnityGameFramework.Runtime
             }
             catch (Exception exception)
             {
-                Log.Warning("Load settings failure with exception '{0}'.", exception);
+                GFLog.Warning("Load settings failure with exception '{0}'.", exception);
                 return false;
             }
         }
@@ -109,7 +109,7 @@ namespace UnityGameFramework.Runtime
             }
             catch (Exception exception)
             {
-                Log.Warning("Save settings failure with exception '{0}'.", exception);
+                GFLog.Warning("Save settings failure with exception '{0}'.", exception);
                 return false;
             }
         }

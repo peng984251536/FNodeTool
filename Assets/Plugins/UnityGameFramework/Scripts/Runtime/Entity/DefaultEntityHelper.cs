@@ -39,7 +39,7 @@ namespace UnityGameFramework.Runtime
             GameObject gameObject = entityInstance as GameObject;
             if (gameObject == null)
             {
-                Log.Error("Entity instance is invalid.");
+                GFLog.Error("Entity instance is invalid.");
                 return null;
             }
 
@@ -65,7 +65,7 @@ namespace UnityGameFramework.Runtime
             m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
             if (m_ResourceComponent == null)
             {
-                Log.Fatal("Resource component is invalid.");
+                GFLog.Fatal("Resource component is invalid.");
                 return;
             }
         }

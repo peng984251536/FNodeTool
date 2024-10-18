@@ -1,8 +1,19 @@
 fileFormatVersion: 2
-guid: 1a53d2e0784edd94b975754cca593918
+<<<<<<<< HEAD:Assets/Resources/Narrative2.asset.meta
+<<<<<<<< HEAD:Assets/Resources/Narrative2.asset.meta
+guid: 02cd13d7dcaa51d4cbd443ba9977b2fa
+========
+guid: 535d24752e3d6444da644e79e90ec2ca
+>>>>>>>> GF-Study:Assets/Resources/Model/NPC01/Jammo-Character/Animations/AnimatorController_Jamo.controller.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+========
+guid: 7fe7247c7e06a304ea1e1bf723111d80
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
+>>>>>>>> f998d1ffb6f748eb6df046325278613fa324ae19:Assets/Plugins/UnityGameFramework.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

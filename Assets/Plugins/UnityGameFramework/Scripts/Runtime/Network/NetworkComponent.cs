@@ -43,7 +43,7 @@ namespace UnityGameFramework.Runtime
             m_NetworkManager = GameFrameworkEntry.GetModule<INetworkManager>();
             if (m_NetworkManager == null)
             {
-                Log.Fatal("Network manager is invalid.");
+                GFLog.Fatal("Network manager is invalid.");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace UnityGameFramework.Runtime
             m_EventComponent = GameEntry.GetComponent<EventComponent>();
             if (m_EventComponent == null)
             {
-                Log.Fatal("Event component is invalid.");
+                GFLog.Fatal("Event component is invalid.");
                 return;
             }
         }
