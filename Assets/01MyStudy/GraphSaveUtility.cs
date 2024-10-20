@@ -37,6 +37,7 @@ namespace MyEditorView
 
             var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
             
+
             //保存 节点的连线信息
             var connectedPorts = Edges.Where((edge => true)).ToArray(); //拿到连线信息
             for (int i = 0; i < connectedPorts.Length; i++)
@@ -48,6 +49,9 @@ namespace MyEditorView
                 //接口
                 var outputCount = outputNode.outputContainer.FindPort(curEdge.output);
                 var intputCount = inputNode.inputContainer.FindPort(curEdge.input);
+                
+                //连接 runtimeNode
+                outputNode.LocalBaseNode.AddChild(inputNode.LocalBaseNode);
                 
                 //保存连线数据
                 dialogueContainer.NodeLinks.Add(new NodeLinkData()
@@ -85,7 +89,7 @@ namespace MyEditorView
                     NodeType = dialogueNode.GetType().ToString(),
                     OutPortName = _OutPortName,
                     InPortName = _InPortName,
-                    
+                    LocalBaseNode = dialogueNode.LocalBaseNode,
                 });
             }
 
