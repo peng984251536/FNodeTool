@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using _02TreeBehaviour;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
-    public abstract class BaseNode
+    [Serializable]
+    public abstract class BaseNode: ScriptableObject
     {
         public enum State
         {
@@ -36,20 +36,21 @@ namespace MyEditorView.Runtime
         //是否是是启动状态
         public bool Started => m_started;
         
-        private bool enable;
+        private bool enable = true;
         /// <summary>
         /// 开关
         /// </summary>
         public bool Enable { get => enable; set => enable = value; }
         
-        [SerializeField, HideInInspector]
-        protected List<NodeLinkData> linkDatas = new List<NodeLinkData>();
-        [SerializeField, HideInInspector]
-        protected List<DialogueNodeData> nodeDatas = new List<DialogueNodeData>();
+        // [SerializeField, HideInInspector]
+        // protected List<NodeLinkData> linkDatas = new List<NodeLinkData>();
+        // [SerializeField, HideInInspector]
+        // protected List<NodeData> nodeDatas = new List<NodeData>();
 
+        public string testValue = "oooooooooooooo";
         #endregion
 
-        public BaseNode(BaseTree baseTree)
+        public void Init(BaseTree baseTree)
         {
             m_Owner = baseTree;
         }
@@ -107,6 +108,7 @@ namespace MyEditorView.Runtime
         protected abstract void OnStop();
         protected abstract State OnUpdate();
         protected virtual void OnGetValue() { }
+        public abstract void RemoveAllChild();
         public abstract void AddChild(BaseNode baseNode);
         public abstract void RemoveChild(BaseNode baseNode);
         public abstract List<BaseNode> GetChildren();

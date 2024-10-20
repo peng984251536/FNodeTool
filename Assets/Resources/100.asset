@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188cbd1a47034e5b9e482814da31d8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkDatas: []
-  nodeDatas: []
   testValue: oooooooooooooo
-  children: []
+  children:
+  - {fileID: 0}
   ExposedInt: 0
 --- !u!114 &-891128147149183822
 MonoBehaviour:
@@ -29,8 +28,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkDatas: []
-  nodeDatas: []
   testValue: oooooooooooooo
   stringValue: 
   stringValue2: 
@@ -57,16 +54,14 @@ MonoBehaviour:
     InputNodeGuid: 702697c0-8f7b-4a2a-88ca-fe5c26635d39
     InputNodeIndex: 0
   DialogueNodeDatas:
-  - userData: {fileID: -2627905926196646185}
-    NodeType: MyEditorView.EntryPointEditorNode
+  - NodeType: MyEditorView.EntryPointEditorNode
     Guid: 49ed8316-e65c-4bd7-8bcc-e78396910b35
     DialogueText: ENTRYPOINT
     Position: {x: 155, y: 208}
     OutPortName:
     - 
     InPortName: []
-  - userData: {fileID: 2265988015330744926}
-    NodeType: MyEditorView.DefaultEditorNode
+  - NodeType: MyEditorView.DefaultEditorNode
     Guid: 0abe8c21-4965-4de6-a7ce-ac9d6862a6da
     DialogueText: SequenceNode
     Position: {x: 286, y: 226}
@@ -74,8 +69,7 @@ MonoBehaviour:
     - 
     InPortName:
     - 
-  - userData: {fileID: -891128147149183822}
-    NodeType: MyEditorView.DefaultEditorNode
+  - NodeType: MyEditorView.DefaultEditorNode
     Guid: 702697c0-8f7b-4a2a-88ca-fe5c26635d39
     DialogueText: DebugLogNode
     Position: {x: 513, y: 162}
@@ -98,8 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188cbd1a47034e5b9e482814da31d8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkDatas: []
-  nodeDatas: []
   testValue: oooooooooooooo
   children:
   - {fileID: -2627905926196646185}

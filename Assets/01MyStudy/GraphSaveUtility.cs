@@ -36,8 +36,8 @@ namespace MyEditorView
             if (!Edges.Any()) return;
 
             var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+            
             //保存 节点的连线信息
-            //var connectedPorts = Edges.Where((edge => edge.input.node != null)).ToArray();//拿到连线信息
             var connectedPorts = Edges.Where((edge => true)).ToArray(); //拿到连线信息
             for (int i = 0; i < connectedPorts.Length; i++)
             {
@@ -63,7 +63,6 @@ namespace MyEditorView
             }
 
             //保存 节点数据
-            //foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
             foreach (var dialogueNode in Nodes)
             {
                 string[] _OutPortName = new string[dialogueNode.outputContainer.childCount];

@@ -16,24 +16,30 @@ namespace MyEditorView
     
     public class EditorNodeBase : Node
     {
-        private UnityEngine.Vector2 m_defaultNodeSize = new UnityEngine.Vector2(100, 200);
-
+        protected UnityEngine.Vector2 m_defaultNodeSize = new UnityEngine.Vector2(100, 200);
+        protected GraphView m_graphView;
+        protected Action<EditorNodeBase> onClickEvent;
+        
         public UnityEngine.Vector2 DefaultNodeSize
         {
             get { return m_defaultNodeSize; }
         }
+        
 
-        protected GraphView m_graphView;
         public string GUID;
         public string DialogueText;
         public bool EntryPoint;
         public List<EditorNodeBase> childNodes = new List<EditorNodeBase>();
-        public BaseNode BaseNode;
+        public BaseNode LocalBaseNode;
+        
 
-        public EditorNodeBase(GraphView graphView, string GUID)
+        public EditorNodeBase(DialogueView graphView, string GUID)
         {
             m_graphView = graphView;
             this.GUID = (string.IsNullOrEmpty(GUID) || GUID == "") ? Guid.NewGuid().ToString() : GUID;
+
+            this.RegisterCallback<MouseDownEvent>((evt => onClickEvent?.Invoke(this)));
+            onClickEvent += graphView.OnSelectNode;
         }
 
         /// <summary>
@@ -47,7 +53,25 @@ namespace MyEditorView
             Port.Capacity capacity = Port.Capacity.Single)
         {
             var generatePort = editorNode.InstantiatePort(Orientation.Horizontal, portDirection, capacity, typeof(float));
-            generatePort.portName = name;
+            if (name == "" || name == string.Empty)
+            {
+                string PortCount;
+                if (portDirection == Direction.Output)
+                {
+                    PortCount = "Input"+(editorNode.outputContainer.childCount+1).ToString();
+                }
+                else
+                {
+                    PortCount = "Output"+(editorNode.inputContainer.childCount+1).ToString();
+                }
+                
+                generatePort.portName = PortCount;
+            }
+            else
+            {
+                generatePort.portName = name;
+            }
+            
             if (portDirection == Direction.Input)
                 editorNode.inputContainer.Add(generatePort);
             else if (portDirection == Direction.Output)
@@ -120,7 +144,11 @@ namespace MyEditorView
             editorNodeBase.RefreshExpandedState();
         }
 
-
+        public void AddEvent(Action<EditorNodeBase> callback)
+        {
+            onClickEvent += callback;
+        }
+        
         public virtual State OnUpdate()
         {
             return childNodes[0].OnUpdate();

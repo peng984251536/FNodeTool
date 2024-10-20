@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace MyEditorView.Runtime
 {
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [NodeName("RandomSelectorNode")]
+    [NodePath("Base/RandomSelectorNode")]
     public class RandomSelectorNode : CompositeNode
     {
         protected override void OnReset()
@@ -26,9 +32,6 @@ namespace MyEditorView.Runtime
             }
             return State.Success;
         }
-
-        public RandomSelectorNode(BaseTree baseTree) : base(baseTree)
-        {
-        }
+        
     }
 }
