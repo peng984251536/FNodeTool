@@ -25,7 +25,15 @@ namespace MyEditorView
             this.LocalBaseNode = localBaseNode;
             m_graphView = graphView;
             //输入输出
-            var inputPort1 = EditorNodeBase.GeneratePort(this, Direction.Input, string.Empty);
+            if ((localBaseNode as EnterNode) == null)
+            {
+                var inputPort1 = EditorNodeBase.GeneratePort(this, Direction.Input, string.Empty);
+            }
+            else
+            {
+                EntryPoint = true;
+            }
+            
             ActionNode actionNode = localBaseNode as ActionNode;
             if (actionNode == null)
             {

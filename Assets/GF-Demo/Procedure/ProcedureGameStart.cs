@@ -25,7 +25,7 @@ namespace Demo
             //切换状态
             //ChangeState<ProcedureInit>(procedureOwner);
             
-            GameEntry.Entity.ShowEntity<JammoEntityLogic>(1,EntityDefault.Jammo,"Prefabs");
+            //GameEntry.Entity.ShowEntity<JammoEntityLogic>(1,EntityDefault.Jammo,"Prefabs");
         }
 
 

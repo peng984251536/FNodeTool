@@ -4,10 +4,9 @@
     /// 按顺序执行所有子节点
     /// </summary>
     [NodeName("SequenceNode")]
-    [NodePath("Base/Composite/SequenceNode")]
+    [NodePath("Base/SequenceNode")]
     public class SequenceNode : CompositeNode
     {
-        
         public int ExposedInt = 0;
 
         protected override void OnReset()
@@ -40,6 +39,7 @@
                         ExposedInt++;
                         return State.Running;
                     case State.Running:
+                        ExposedInt++;
                         return State.Running;
                 }
             }

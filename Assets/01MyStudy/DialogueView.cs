@@ -81,18 +81,26 @@ namespace MyEditorView
 
         #region 创建节点
 
-        public EntryPointEditorNode GenerateEntryPointNode(string guid = "")
+        public DefaultEditorNode GenerateEntryPointNode(string guid = "")
         {
             if (guid == "")
                 guid = Guid.NewGuid().ToString();
-            var node = new EntryPointEditorNode(this, guid)
+            // var node = new EntryPointEditorNode(this, guid)
+            // {
+            //     title = "START",
+            //     DialogueText = "ENTRYPOINT",
+            //     EntryPoint = true
+            // };
+            var baseNode = ScriptableObject.CreateInstance<EnterNode>();
+            var nodeName = (baseNode.GetType().GetCustomAttributes(typeof(NodeName), false)[0] as NodeName).Name;
+            string _guid = Guid.NewGuid().ToString();
+            var dialogueNode = new DefaultEditorNode(this, baseNode, _guid)
             {
-                title = "START",
-                DialogueText = "ENTRYPOINT",
-                EntryPoint = true
+                title = nodeName,
+                DialogueText = nodeName,
             };
 
-            return node;
+            return dialogueNode;
         }
 
         /// <summary>

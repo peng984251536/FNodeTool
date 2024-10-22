@@ -24,7 +24,6 @@ namespace MyEditorView.Runtime
                 return null;
 
             BaseTree baseTree = ScriptableObject.CreateInstance<BaseTree>();
-            baseTree.treeState = BaseNode.State.Default;
 
             // for (int i = 0; i < DialogueNodeDatas.Count; i++)
             // {
@@ -37,12 +36,12 @@ namespace MyEditorView.Runtime
             for (int i = 0; i < BaseNodes.Count; i++)
             {
                 baseTree.Nodes.Add(BaseNodes[i]);
-                if (DialogueNodeDatas[i].NodeType.Contains(nameof(EntryPointEditorNode)))
+                if ((BaseNodes[i] as EnterNode)!=null)
                 {
                     baseTree.rootNode = BaseNodes[i];
                 }
             }
-
+            baseTree.ResetState();
             return baseTree;
         }
     }

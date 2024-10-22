@@ -11,7 +11,7 @@ namespace MyEditorView.Runtime
     /// </summary>
     public abstract class DecoratorNode : BaseNode, IDecoratorNode
     {
-        [SerializeField, HideInInspector] protected BaseNode child;
+        public BaseNode child;
 
         protected sealed override void GetValue()
         {

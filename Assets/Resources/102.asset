@@ -1,0 +1,212 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4897715540741982365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  stringValue: "\u563B\u563B\u563B"
+  stringValue2: 
+  stringValue3: 
+--- !u!114 &-3692499200497770941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  stringValue: "\u54AF\u54AF\u54AF"
+  stringValue2: 
+  stringValue3: 
+--- !u!114 &-2050941483218747123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188cbd1a47034e5b9e482814da31d8cb, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  children:
+  - {fileID: -4897715540741982365}
+  - {fileID: 7553504935280755636}
+  - {fileID: -3692499200497770941}
+  ExposedInt: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1233f870b24d7788a6f55e20a4e0f8, type: 3}
+  m_Name: 102
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - OutputNodeGuid: 48a866e8-8bbf-48a5-8bf2-468b639f255a
+    OutputNodeIndex: 0
+    InputNodeGuid: ac006877-0385-4ca2-b704-bfc96cb62cec
+    InputNodeIndex: 0
+  - OutputNodeGuid: ac006877-0385-4ca2-b704-bfc96cb62cec
+    OutputNodeIndex: 0
+    InputNodeGuid: 040a7207-6de5-42fe-b5f7-0fcdd0b7e0e4
+    InputNodeIndex: 0
+  - OutputNodeGuid: 040a7207-6de5-42fe-b5f7-0fcdd0b7e0e4
+    OutputNodeIndex: 0
+    InputNodeGuid: cfdd618d-7ff3-46bc-b843-fe94cc09088a
+    InputNodeIndex: 0
+  - OutputNodeGuid: 040a7207-6de5-42fe-b5f7-0fcdd0b7e0e4
+    OutputNodeIndex: 0
+    InputNodeGuid: 42b6ad75-d9a7-4816-9615-ca91a556cb48
+    InputNodeIndex: 0
+  - OutputNodeGuid: 040a7207-6de5-42fe-b5f7-0fcdd0b7e0e4
+    OutputNodeIndex: 0
+    InputNodeGuid: 6b5aacf2-557f-4dd5-9d95-3736294ce57f
+    InputNodeIndex: 0
+  DialogueNodeDatas:
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: 6b5aacf2-557f-4dd5-9d95-3736294ce57f
+    DialogueText: DebugLogNode
+    Position: {x: 815, y: 333}
+    LocalBaseNode: {fileID: -3692499200497770941}
+    OutPortName: []
+    InPortName:
+    - 
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: 42b6ad75-d9a7-4816-9615-ca91a556cb48
+    DialogueText: DebugLogNode
+    Position: {x: 815, y: 157}
+    LocalBaseNode: {fileID: 7553504935280755636}
+    OutPortName: []
+    InPortName:
+    - 
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: cfdd618d-7ff3-46bc-b843-fe94cc09088a
+    DialogueText: DebugLogNode
+    Position: {x: 1098, y: -15}
+    LocalBaseNode: {fileID: -4897715540741982365}
+    OutPortName: []
+    InPortName:
+    - 
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: 4e1132ee-0f32-435c-a18a-432c137a4ce2
+    DialogueText: DebugLogNode
+    Position: {x: 815, y: 492}
+    LocalBaseNode: {fileID: 4804338875232526360}
+    OutPortName: []
+    InPortName:
+    - 
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: 48a866e8-8bbf-48a5-8bf2-468b639f255a
+    DialogueText: EnterNode
+    Position: {x: 176, y: 157}
+    LocalBaseNode: {fileID: 528737135520256095}
+    OutPortName:
+    - 
+    InPortName: []
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: ac006877-0385-4ca2-b704-bfc96cb62cec
+    DialogueText: Repeat
+    Position: {x: 311, y: 157}
+    LocalBaseNode: {fileID: 7230939873787427828}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  - NodeType: MyEditorView.DefaultEditorNode
+    Guid: 040a7207-6de5-42fe-b5f7-0fcdd0b7e0e4
+    DialogueText: SequenceNode
+    Position: {x: 524, y: 157}
+    LocalBaseNode: {fileID: -2050941483218747123}
+    OutPortName:
+    - 
+    InPortName:
+    - 
+  BaseNodes:
+  - {fileID: -3692499200497770941}
+  - {fileID: 7553504935280755636}
+  - {fileID: -4897715540741982365}
+  - {fileID: 4804338875232526360}
+  - {fileID: 528737135520256095}
+  - {fileID: 7230939873787427828}
+  - {fileID: -2050941483218747123}
+--- !u!114 &528737135520256095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a162bdbfcfe4451aaae5226c7bb2aaf, type: 3}
+  m_Name: EnterNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  child: {fileID: 7230939873787427828}
+--- !u!114 &4804338875232526360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  stringValue: 
+  stringValue2: 
+  stringValue3: 
+--- !u!114 &7230939873787427828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6139f8edda74c84908ec2113ba2a36e, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  child: {fileID: -2050941483218747123}
+--- !u!114 &7553504935280755636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ca956a20d4ac5b75d3279a34f2635, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  testValue: oooooooooooooo
+  stringValue: "\u54C8\u54C8\u54C8"
+  stringValue2: 
+  stringValue3: 

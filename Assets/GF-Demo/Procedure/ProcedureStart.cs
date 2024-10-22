@@ -24,7 +24,7 @@ namespace Demo
         {
             base.OnEnter(procedureOwner);
             GFLog.Debug($"{nameof(ProcedureStart)}:OnEnter");
-            GameEntry.UI.OpenUIForm(UIDefaultPath.NormalPath, UILayer.Normal,this);
+            GameEntry.UI.OpenUIForm(UIPathDefault.NormalPath, UILayer.Normal,this);
             //切换状态
             //ChangeState<ProcedureInit>(procedureOwner);
         }

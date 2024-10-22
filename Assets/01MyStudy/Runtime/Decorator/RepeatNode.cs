@@ -4,13 +4,9 @@ namespace MyEditorView.Runtime
     [NodePath("Base/RepeatNode")]
     public class RepeatNode : DecoratorNode
     {
-        public int count;
-
-        int currentIndex=0;
 
         protected override void DoAction()
         {
-            currentIndex = 0;
         }
 
         protected override State OnUpdate()
@@ -20,11 +16,9 @@ namespace MyEditorView.Runtime
                 case State.Running:
                     return State.Running;
                 case State.Failure:
-                    currentIndex++;
-                    break;
+                    return State.Running;
                 case State.Success:
-                    currentIndex++;
-                    break;
+                    return State.Running;
             }
             return State.Running;
         }

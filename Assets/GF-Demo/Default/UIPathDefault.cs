@@ -2,7 +2,7 @@
 
 namespace Demo
 {
-    public class UIDefaultPath
+    public class UIPathDefault
     {
         public const string NormalPath = "Assets/Resources/UI/UITestFormLogic.prefab";
     }
