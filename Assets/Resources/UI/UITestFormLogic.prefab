@@ -190,7 +190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3701367351458858261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 6109323735589380789}
   - component: {fileID: 7613078643293170081}
   - component: {fileID: 126974761231084939}
-  - component: {fileID: 3335212479913214080}
+  - component: {fileID: 2160111458213315671}
   m_Layer: 0
   m_Name: UITestFormLogic
   m_TagString: Untagged
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6109323735589380788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3335212479913214080
+--- !u!114 &2160111458213315671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,4 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da557a11f9f0e042803c43d7c679e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BtnClick: {fileID: 6040366956018816797}
+  m_BtnClick: {fileID: 0}
+  mWidgetParent: {fileID: 6109323735589380789}
+  mWidgetPrefabPathList:
+  - Assets/Resources/100.asset
+  - Assets/Resources/102.asset
