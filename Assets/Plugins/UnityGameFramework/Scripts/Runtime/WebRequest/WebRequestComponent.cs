@@ -108,7 +108,7 @@ namespace UnityGameFramework.Runtime
             m_WebRequestManager = GameFrameworkEntry.GetModule<IWebRequestManager>();
             if (m_WebRequestManager == null)
             {
-                GFLog.Fatal("Web request manager is invalid.");
+                Log.Fatal("Web request manager is invalid.");
                 return;
             }
 
@@ -123,7 +123,7 @@ namespace UnityGameFramework.Runtime
             m_EventComponent = GameEntry.GetComponent<EventComponent>();
             if (m_EventComponent == null)
             {
-                GFLog.Fatal("Event component is invalid.");
+                Log.Fatal("Event component is invalid.");
                 return;
             }
 
@@ -518,7 +518,7 @@ namespace UnityGameFramework.Runtime
             WebRequestAgentHelperBase webRequestAgentHelper = Helper.CreateHelper(m_WebRequestAgentHelperTypeName, m_CustomWebRequestAgentHelper, index);
             if (webRequestAgentHelper == null)
             {
-                GFLog.Error("Can not create web request agent helper.");
+                Log.Error("Can not create web request agent helper.");
                 return;
             }
 
@@ -557,7 +557,7 @@ namespace UnityGameFramework.Runtime
 
         private void OnWebRequestFailure(object sender, GameFramework.WebRequest.WebRequestFailureEventArgs e)
         {
-            GFLog.Warning("Web request failure, web request serial id '{0}', web request uri '{1}', error message '{2}'.", e.SerialId, e.WebRequestUri, e.ErrorMessage);
+            Log.Warning("Web request failure, web request serial id '{0}', web request uri '{1}', error message '{2}'.", e.SerialId, e.WebRequestUri, e.ErrorMessage);
             m_EventComponent.Fire(this, WebRequestFailureEventArgs.Create(e));
         }
     }

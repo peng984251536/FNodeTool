@@ -39,7 +39,7 @@ namespace UnityGameFramework.Runtime
             GameObject gameObject = uiFormInstance as GameObject;
             if (gameObject == null)
             {
-                GFLog.Error("UI form instance is invalid.");
+                Log.Error("UI form instance is invalid.");
                 return null;
             }
 
@@ -66,7 +66,7 @@ namespace UnityGameFramework.Runtime
             m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
             if (m_ResourceComponent == null)
             {
-                GFLog.Fatal("Resource component is invalid.");
+                Log.Fatal("Resource component is invalid.");
                 return;
             }
         }

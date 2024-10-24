@@ -96,7 +96,7 @@ namespace UnityGameFramework.Runtime
             m_SoundManager = GameFrameworkEntry.GetModule<ISoundManager>();
             if (m_SoundManager == null)
             {
-                GFLog.Fatal("Sound manager is invalid.");
+                Log.Fatal("Sound manager is invalid.");
                 return;
             }
 
@@ -138,14 +138,14 @@ namespace UnityGameFramework.Runtime
             BaseComponent baseComponent = GameEntry.GetComponent<BaseComponent>();
             if (baseComponent == null)
             {
-                GFLog.Fatal("Base component is invalid.");
+                Log.Fatal("Base component is invalid.");
                 return;
             }
 
             m_EventComponent = GameEntry.GetComponent<EventComponent>();
             if (m_EventComponent == null)
             {
-                GFLog.Fatal("Event component is invalid.");
+                Log.Fatal("Event component is invalid.");
                 return;
             }
 
@@ -161,7 +161,7 @@ namespace UnityGameFramework.Runtime
             SoundHelperBase soundHelper = Helper.CreateHelper(m_SoundHelperTypeName, m_CustomSoundHelper);
             if (soundHelper == null)
             {
-                GFLog.Error("Can not create sound helper.");
+                Log.Error("Can not create sound helper.");
                 return;
             }
 
@@ -183,7 +183,7 @@ namespace UnityGameFramework.Runtime
             {
                 if (!AddSoundGroup(m_SoundGroups[i].Name, m_SoundGroups[i].AvoidBeingReplacedBySamePriority, m_SoundGroups[i].Mute, m_SoundGroups[i].Volume, m_SoundGroups[i].AgentHelperCount))
                 {
-                    GFLog.Warning("Add sound group '{0}' failure.", m_SoundGroups[i].Name);
+                    Log.Warning("Add sound group '{0}' failure.", m_SoundGroups[i].Name);
                     continue;
                 }
             }
@@ -265,7 +265,7 @@ namespace UnityGameFramework.Runtime
             SoundGroupHelperBase soundGroupHelper = Helper.CreateHelper(m_SoundGroupHelperTypeName, m_CustomSoundGroupHelper, SoundGroupCount);
             if (soundGroupHelper == null)
             {
-                GFLog.Error("Can not create sound group helper.");
+                Log.Error("Can not create sound group helper.");
                 return false;
             }
 
@@ -583,7 +583,7 @@ namespace UnityGameFramework.Runtime
             SoundAgentHelperBase soundAgentHelper = Helper.CreateHelper(m_SoundAgentHelperTypeName, m_CustomSoundAgentHelper, index);
             if (soundAgentHelper == null)
             {
-                GFLog.Error("Can not create sound agent helper.");
+                Log.Error("Can not create sound agent helper.");
                 return false;
             }
 
@@ -634,11 +634,11 @@ namespace UnityGameFramework.Runtime
             string logMessage = Utility.Text.Format("Play sound failure, asset name '{0}', sound group name '{1}', error code '{2}', error message '{3}'.", e.SoundAssetName, e.SoundGroupName, e.ErrorCode, e.ErrorMessage);
             if (e.ErrorCode == PlaySoundErrorCode.IgnoredDueToLowPriority)
             {
-                GFLog.Info(logMessage);
+                Log.Info(logMessage);
             }
             else
             {
-                GFLog.Warning(logMessage);
+                Log.Warning(logMessage);
             }
 
             m_EventComponent.Fire(this, PlaySoundFailureEventArgs.Create(e));

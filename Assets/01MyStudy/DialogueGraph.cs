@@ -176,7 +176,7 @@ namespace MyEditorView
             foreach (var property in properties)
             {
                 var v = property.Attributes;
-                GFLog.Debug($"InspectClassProperties:type:{property.PropertyType}--value:{property.GetType()}");
+                Log.Debug($"InspectClassProperties:type:{property.PropertyType}--value:{property.GetType()}");
             }
         }
 

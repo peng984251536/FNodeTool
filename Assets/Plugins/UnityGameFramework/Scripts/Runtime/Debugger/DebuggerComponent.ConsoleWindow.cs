@@ -221,7 +221,7 @@ namespace UnityGameFramework.Runtime
                 m_SettingComponent = GameEntry.GetComponent<SettingComponent>();
                 if (m_SettingComponent == null)
                 {
-                    GFLog.Fatal("Setting component is invalid.");
+                    Log.Fatal("Setting component is invalid.");
                     return;
                 }
 
@@ -416,7 +416,7 @@ namespace UnityGameFramework.Runtime
             {
                 if (results == null)
                 {
-                    GFLog.Error("Results is invalid.");
+                    Log.Error("Results is invalid.");
                     return;
                 }
 
@@ -431,13 +431,13 @@ namespace UnityGameFramework.Runtime
             {
                 if (results == null)
                 {
-                    GFLog.Error("Results is invalid.");
+                    Log.Error("Results is invalid.");
                     return;
                 }
 
                 if (count <= 0)
                 {
-                    GFLog.Error("Count is invalid.");
+                    Log.Error("Count is invalid.");
                     return;
                 }
 

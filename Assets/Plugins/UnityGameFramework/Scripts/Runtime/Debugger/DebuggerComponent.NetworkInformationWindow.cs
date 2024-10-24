@@ -22,7 +22,7 @@ namespace UnityGameFramework.Runtime
                 m_NetworkComponent = GameEntry.GetComponent<NetworkComponent>();
                 if (m_NetworkComponent == null)
                 {
-                    GFLog.Fatal("Network component is invalid.");
+                    Log.Fatal("Network component is invalid.");
                     return;
                 }
             }

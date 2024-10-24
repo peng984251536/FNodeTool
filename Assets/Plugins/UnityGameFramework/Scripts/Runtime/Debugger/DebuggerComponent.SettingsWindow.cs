@@ -28,14 +28,14 @@ namespace UnityGameFramework.Runtime
                 m_DebuggerComponent = GameEntry.GetComponent<DebuggerComponent>();
                 if (m_DebuggerComponent == null)
                 {
-                    GFLog.Fatal("Debugger component is invalid.");
+                    Log.Fatal("Debugger component is invalid.");
                     return;
                 }
 
                 m_SettingComponent = GameEntry.GetComponent<SettingComponent>();
                 if (m_SettingComponent == null)
                 {
-                    GFLog.Fatal("Setting component is invalid.");
+                    Log.Fatal("Setting component is invalid.");
                     return;
                 }
 

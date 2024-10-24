@@ -70,7 +70,7 @@ namespace UnityGameFramework.Runtime
             {
                 if (!m_Available)
                 {
-                    GFLog.Warning("UI form '{0}' is not available.", Name);
+                    Log.Warning("UI form '{0}' is not available.", Name);
                     return;
                 }
 

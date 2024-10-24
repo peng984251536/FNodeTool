@@ -53,7 +53,7 @@ namespace UnityGameFramework.Runtime
         /// <returns>所有游戏配置项的名称。</returns>
         public override string[] GetAllSettingNames()
         {
-            GFLog.Warning("GetAllSettingNames is not supported.");
+            Log.Warning("GetAllSettingNames is not supported.");
             return null;
         }
 
@@ -69,7 +69,7 @@ namespace UnityGameFramework.Runtime
             }
 
             results.Clear();
-            GFLog.Warning("GetAllSettingNames is not supported.");
+            Log.Warning("GetAllSettingNames is not supported.");
         }
 
         /// <summary>

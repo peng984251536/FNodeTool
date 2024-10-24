@@ -49,7 +49,7 @@ public class UITestFormLogic : UIFormLogic
 
     private void OnClickBtn()
     {
-        GFLog.Debug($"UITestFormLogic：打印日志。");
+        Log.Debug($"UITestFormLogic：打印日志。");
         m_ProcedureStart.ChangeProcedure();
         GameEntry.UI.CloseUIForm(this.UIForm);
     }

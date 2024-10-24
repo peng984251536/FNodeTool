@@ -558,7 +558,7 @@ namespace UnityGameFramework.Runtime
             BaseComponent baseComponent = GetComponent<BaseComponent>();
             if (baseComponent == null)
             {
-                GFLog.Error("Can not find base component.");
+                Log.Error("Can not find base component.");
                 return;
             }
 
@@ -719,7 +719,7 @@ namespace UnityGameFramework.Runtime
         {
             if (string.IsNullOrEmpty(readOnlyPath))
             {
-                GFLog.Error("Read-only path is invalid.");
+                Log.Error("Read-only path is invalid.");
                 return;
             }
 
@@ -734,7 +734,7 @@ namespace UnityGameFramework.Runtime
         {
             if (string.IsNullOrEmpty(readWritePath))
             {
-                GFLog.Error("Read-write path is invalid.");
+                Log.Error("Read-write path is invalid.");
                 return;
             }
 
@@ -1045,7 +1045,7 @@ namespace UnityGameFramework.Runtime
         {
             if (loadAssetCallbacks == null)
             {
-                GFLog.Error("Load asset callbacks is invalid.");
+                Log.Error("Load asset callbacks is invalid.");
                 return;
             }
 
@@ -1134,7 +1134,7 @@ namespace UnityGameFramework.Runtime
         {
             if (loadSceneCallbacks == null)
             {
-                GFLog.Error("Load scene callbacks is invalid.");
+                Log.Error("Load scene callbacks is invalid.");
                 return;
             }
 
@@ -1201,25 +1201,25 @@ namespace UnityGameFramework.Runtime
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {
-                GFLog.Error("Scene asset name is invalid.");
+                Log.Error("Scene asset name is invalid.");
                 return;
             }
 
             if (!sceneAssetName.StartsWith("Assets/", StringComparison.Ordinal) || !sceneAssetName.EndsWith(".unity", StringComparison.Ordinal))
             {
-                GFLog.Error("Scene asset name '{0}' is invalid.", sceneAssetName);
+                Log.Error("Scene asset name '{0}' is invalid.", sceneAssetName);
                 return;
             }
 
             if (unloadSceneCallbacks == null)
             {
-                GFLog.Error("Unload scene callbacks is invalid.");
+                Log.Error("Unload scene callbacks is invalid.");
                 return;
             }
 
             if (!HasFile(sceneAssetName))
             {
-                GFLog.Error("Scene '{0}' is not exist.", sceneAssetName);
+                Log.Error("Scene '{0}' is not exist.", sceneAssetName);
                 return;
             }
 
@@ -1315,7 +1315,7 @@ namespace UnityGameFramework.Runtime
         {
             if (loadBinaryCallbacks == null)
             {
-                GFLog.Error("Load binary callbacks is invalid.");
+                Log.Error("Load binary callbacks is invalid.");
                 return;
             }
 
@@ -1622,7 +1622,7 @@ namespace UnityGameFramework.Runtime
             {
                 if (assetFullName.ToLowerInvariant() == fileFullName.ToLowerInvariant())
                 {
-                    GFLog.Warning("The real path of the specific asset '{0}' is '{1}'. Check the case of letters in the path.", assetName, "Assets" + fileFullName.Substring(Application.dataPath.Length));
+                    Log.Warning("The real path of the specific asset '{0}' is '{1}'. Check the case of letters in the path.", assetName, "Assets" + fileFullName.Substring(Application.dataPath.Length));
                 }
 
                 return false;

@@ -154,7 +154,7 @@ namespace UnityGameFramework.Runtime
             m_UIManager = GameFrameworkEntry.GetModule<IUIManager>();
             if (m_UIManager == null)
             {
-                GFLog.Fatal("UI manager is invalid.");
+                Log.Fatal("UI manager is invalid.");
                 return;
             }
 
@@ -186,14 +186,14 @@ namespace UnityGameFramework.Runtime
             BaseComponent baseComponent = GameEntry.GetComponent<BaseComponent>();
             if (baseComponent == null)
             {
-                GFLog.Fatal("Base component is invalid.");
+                Log.Fatal("Base component is invalid.");
                 return;
             }
 
             m_EventComponent = GameEntry.GetComponent<EventComponent>();
             if (m_EventComponent == null)
             {
-                GFLog.Fatal("Event component is invalid.");
+                Log.Fatal("Event component is invalid.");
                 return;
             }
 
@@ -215,7 +215,7 @@ namespace UnityGameFramework.Runtime
             UIFormHelperBase uiFormHelper = Helper.CreateHelper(m_UIFormHelperTypeName, m_CustomUIFormHelper);
             if (uiFormHelper == null)
             {
-                GFLog.Error("Can not create UI form helper.");
+                Log.Error("Can not create UI form helper.");
                 return;
             }
 
@@ -239,7 +239,7 @@ namespace UnityGameFramework.Runtime
             {
                 if (!AddUIGroup(m_UIGroups[i].Name, m_UIGroups[i].Depth))
                 {
-                    GFLog.Warning("Add UI group '{0}' failure.", m_UIGroups[i].Name);
+                    Log.Warning("Add UI group '{0}' failure.", m_UIGroups[i].Name);
                     continue;
                 }
             }
@@ -309,7 +309,7 @@ namespace UnityGameFramework.Runtime
             UIGroupHelperBase uiGroupHelper = Helper.CreateHelper(m_UIGroupHelperTypeName, m_CustomUIGroupHelper, UIGroupCount);
             if (uiGroupHelper == null)
             {
-                GFLog.Error("Can not create UI group helper.");
+                Log.Error("Can not create UI group helper.");
                 return false;
             }
 
@@ -388,7 +388,7 @@ namespace UnityGameFramework.Runtime
         {
             if (results == null)
             {
-                GFLog.Error("Results is invalid.");
+                Log.Error("Results is invalid.");
                 return;
             }
 
@@ -424,7 +424,7 @@ namespace UnityGameFramework.Runtime
         {
             if (results == null)
             {
-                GFLog.Error("Results is invalid.");
+                Log.Error("Results is invalid.");
                 return;
             }
 
@@ -675,7 +675,7 @@ namespace UnityGameFramework.Runtime
         {
             if (uiForm == null)
             {
-                GFLog.Warning("UI form is invalid.");
+                Log.Warning("UI form is invalid.");
                 return;
             }
 
@@ -691,7 +691,7 @@ namespace UnityGameFramework.Runtime
         {
             if (uiForm == null)
             {
-                GFLog.Warning("UI form is invalid.");
+                Log.Warning("UI form is invalid.");
                 return;
             }
 
@@ -705,7 +705,7 @@ namespace UnityGameFramework.Runtime
 
         private void OnOpenUIFormFailure(object sender, GameFramework.UI.OpenUIFormFailureEventArgs e)
         {
-            GFLog.Warning("Open UI form failure, asset name '{0}', UI group name '{1}', pause covered UI form '{2}', error message '{3}'.", e.UIFormAssetName, e.UIGroupName, e.PauseCoveredUIForm, e.ErrorMessage);
+            Log.Warning("Open UI form failure, asset name '{0}', UI group name '{1}', pause covered UI form '{2}', error message '{3}'.", e.UIFormAssetName, e.UIGroupName, e.PauseCoveredUIForm, e.ErrorMessage);
             if (m_EnableOpenUIFormFailureEvent)
             {
                 m_EventComponent.Fire(this, OpenUIFormFailureEventArgs.Create(e));

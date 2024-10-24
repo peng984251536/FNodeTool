@@ -49,14 +49,14 @@ namespace UnityGameFramework.Runtime
             m_SettingManager = GameFrameworkEntry.GetModule<ISettingManager>();
             if (m_SettingManager == null)
             {
-                GFLog.Fatal("Setting manager is invalid.");
+                Log.Fatal("Setting manager is invalid.");
                 return;
             }
 
             SettingHelperBase settingHelper = Helper.CreateHelper(m_SettingHelperTypeName, m_CustomSettingHelper);
             if (settingHelper == null)
             {
-                GFLog.Error("Can not create setting helper.");
+                Log.Error("Can not create setting helper.");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace UnityGameFramework.Runtime
         {
             if (!m_SettingManager.Load())
             {
-                GFLog.Error("Load settings failure.");
+                Log.Error("Load settings failure.");
             }
         }
 

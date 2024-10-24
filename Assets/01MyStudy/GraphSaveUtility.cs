@@ -44,7 +44,7 @@ namespace MyEditorView
             }
             else
             {
-                GFLog.Debug($"清除{nameof(DialogueContainer)}数据。");
+                Log.Debug($"清除{nameof(DialogueContainer)}数据。");
                 AssetDatabase.RemoveObjectFromAsset(dialogueContainer);
                 dialogueContainer.NodeLinks.Clear();
                 dialogueContainer.BaseNodes.Clear();

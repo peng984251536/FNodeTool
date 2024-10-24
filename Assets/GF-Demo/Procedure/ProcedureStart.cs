@@ -15,7 +15,7 @@ namespace Demo
         
         protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
         {
-            GFLog.Debug("Hello World");
+            Log.Debug("Hello World");
             base.OnInit(procedureOwner);
             
         }
@@ -23,7 +23,7 @@ namespace Demo
         protected override void OnEnter(IFsm<IProcedureManager> procedureOwner)
         {
             base.OnEnter(procedureOwner);
-            GFLog.Debug($"{nameof(ProcedureStart)}:OnEnter");
+            Log.Debug($"{nameof(ProcedureStart)}:OnEnter");
             GameEntry.UI.OpenUIForm(UIPathDefault.NormalPath, UILayer.Normal,this);
             //切换状态
             //ChangeState<ProcedureInit>(procedureOwner);
@@ -45,7 +45,7 @@ namespace Demo
 
         protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
         {
-            GFLog.Debug($"{nameof(ProcedureStart)}:OnLeave");
+            Log.Debug($"{nameof(ProcedureStart)}:OnLeave");
             base.OnLeave(procedureOwner, isShutdown);
             
             

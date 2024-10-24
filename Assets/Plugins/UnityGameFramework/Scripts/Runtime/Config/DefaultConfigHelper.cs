@@ -48,7 +48,7 @@ namespace UnityGameFramework.Runtime
                 }
             }
 
-            GFLog.Warning("Config asset '{0}' is invalid.", configAssetName);
+            Log.Warning("Config asset '{0}' is invalid.", configAssetName);
             return false;
         }
 
@@ -97,7 +97,7 @@ namespace UnityGameFramework.Runtime
                     string[] splitedLine = configLineString.Split(ColumnSplitSeparator, StringSplitOptions.None);
                     if (splitedLine.Length != ColumnCount)
                     {
-                        GFLog.Warning("Can not parse config line string '{0}' which column count is invalid.", configLineString);
+                        Log.Warning("Can not parse config line string '{0}' which column count is invalid.", configLineString);
                         return false;
                     }
 
@@ -105,7 +105,7 @@ namespace UnityGameFramework.Runtime
                     string configValue = splitedLine[3];
                     if (!configManager.AddConfig(configName, configValue))
                     {
-                        GFLog.Warning("Can not add config with config name '{0}' which may be invalid or duplicate.", configName);
+                        Log.Warning("Can not add config with config name '{0}' which may be invalid or duplicate.", configName);
                         return false;
                     }
                 }
@@ -114,7 +114,7 @@ namespace UnityGameFramework.Runtime
             }
             catch (Exception exception)
             {
-                GFLog.Warning("Can not parse config string with exception '{0}'.", exception);
+                Log.Warning("Can not parse config string with exception '{0}'.", exception);
                 return false;
             }
         }
@@ -142,7 +142,7 @@ namespace UnityGameFramework.Runtime
                             string configValue = binaryReader.ReadString();
                             if (!configManager.AddConfig(configName, configValue))
                             {
-                                GFLog.Warning("Can not add config with config name '{0}' which may be invalid or duplicate.", configName);
+                                Log.Warning("Can not add config with config name '{0}' which may be invalid or duplicate.", configName);
                                 return false;
                             }
                         }
@@ -153,7 +153,7 @@ namespace UnityGameFramework.Runtime
             }
             catch (Exception exception)
             {
-                GFLog.Warning("Can not parse config bytes with exception '{0}'.", exception);
+                Log.Warning("Can not parse config bytes with exception '{0}'.", exception);
                 return false;
             }
         }
@@ -173,7 +173,7 @@ namespace UnityGameFramework.Runtime
             m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
             if (m_ResourceComponent == null)
             {
-                GFLog.Fatal("Resource component is invalid.");
+                Log.Fatal("Resource component is invalid.");
                 return;
             }
         }

@@ -43,7 +43,7 @@ namespace UnityGameFramework.Runtime
             m_ObjectPoolManager = GameFrameworkEntry.GetModule<IObjectPoolManager>();
             if (m_ObjectPoolManager == null)
             {
-                GFLog.Fatal("Object pool manager is invalid.");
+                Log.Fatal("Object pool manager is invalid.");
                 return;
             }
         }
@@ -1017,7 +1017,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public void Release()
         {
-            GFLog.Info("Object pool release...");
+            Log.Info("Object pool release...");
             m_ObjectPoolManager.Release();
         }
 
@@ -1026,7 +1026,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public void ReleaseAllUnused()
         {
-            GFLog.Info("Object pool release all unused...");
+            Log.Info("Object pool release all unused...");
             m_ObjectPoolManager.ReleaseAllUnused();
         }
     }

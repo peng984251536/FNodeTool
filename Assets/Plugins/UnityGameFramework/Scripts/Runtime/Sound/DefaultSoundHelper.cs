@@ -28,7 +28,7 @@ namespace UnityGameFramework.Runtime
             m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
             if (m_ResourceComponent == null)
             {
-                GFLog.Fatal("Resource component is invalid.");
+                Log.Fatal("Resource component is invalid.");
                 return;
             }
         }
