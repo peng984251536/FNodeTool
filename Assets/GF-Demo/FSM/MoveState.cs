@@ -1,25 +1,22 @@
 ﻿using GameFramework;
 using GameFramework.Fsm;
 using UnityEngine;
-using UnityGameFramework.Runtime;
 
 //using ProcedureOwner = GameFramework.Fsm.IFsm<Demo.EntityEnemy>;
 
 namespace Demo
 {
-    public class IdleState : FsmState<EntityEnemy>, IReference
+    public class MoveState : FsmState<EntityEnemy>, IReference
     {
         private EntityEnemy owner;
 
         protected override void OnInit(IFsm<EntityEnemy> procedureOwner)
         {
-            //创建有限状态机时调用
             base.OnInit(procedureOwner);
         }
 
         protected override void OnEnter(IFsm<EntityEnemy> procedureOwner)
         {
-            //进入本状态时调用
             base.OnEnter(procedureOwner);
 
             owner = procedureOwner.Owner;
@@ -39,13 +36,8 @@ namespace Demo
             {
                 return;
             }
-            
-            FsmComponent fsmComponent = GameEntry.FileSystem.GetComponent<FsmComponent>();
-            bool hasAttack = fsmComponent.HasFsm<AttackState>();
-            if (hasAttack)
-            {
-                ChangeState<AttackState>(procedureOwner);
-            }
+
+            ChangeState<AttackState>(procedureOwner);
         }
 
 
@@ -56,10 +48,9 @@ namespace Demo
         {
         }
         
-        
-        public static IdleState Create()
+        public static MoveState Create()
         {
-            IdleState state = ReferencePool.Acquire<IdleState>();
+            MoveState state = ReferencePool.Acquire<MoveState>();
             return state;
         }
     }
